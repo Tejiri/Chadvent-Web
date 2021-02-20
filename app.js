@@ -21,7 +21,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.listen(process.env.PORT ||3000);
+app.listen(process.env.PORT || 3000);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -95,7 +95,7 @@ passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
 
 var memberList = [];
-contributionList = ["fdsdfds","dffdsfsd"];
+contributionList = ["fdsdfds", "dffdsfsd"];
 var memberToEdit = "";
 transaction = {};
 
@@ -213,17 +213,14 @@ app
   .get(function (req, res) {
     if (req.isAuthenticated()) {
       if (req.user.username == process.env.ADMIN_USERNAME) {
-        
         memberModel.find(function (err, docs) {
           memberList = [];
-          contributionList =[];
+          contributionList = [];
           for (const key in docs) {
             memberList.push(docs[key]);
           }
 
-          
           accountModel.find(function (err, docs) {
-           
             for (const key in docs) {
               var totalcontribution =
                 parseFloat(docs[key].sharecapital) +
@@ -231,16 +228,12 @@ app
                 parseFloat(docs[key].specialdeposit);
               contributionList.push(totalcontribution.toFixed(2));
               console.log(contributionList);
-              
             }
             res.render("admin", {
-                memberList: memberList,
-                contributionList: contributionList,
-              });
+              memberList: memberList,
+              contributionList: contributionList,
+            });
           });
-
-          
-          
         });
       } else {
         res.redirect("dashboard");
@@ -328,6 +321,33 @@ app.route("/json/memberaccount").get(function (req, res) {
   accountModel.find(function (err, docs) {
     res.send(docs);
   });
+});
+
+app.route("/json/login").post(function (req, res) {
+  if (req.body.username == "" || req.body.password == "") {
+    res.send({ message: "Error" });
+  } else {
+    const user = new userModel({
+      username: req.body.username,
+      password: req.body.password,
+    });
+    req.login(user, function (error) {
+      if (error) {
+          res.send({ message: "Error" });
+      } else {
+        passport.authenticate("local")(req, res, function name() {
+          if (
+            req.body.username == process.env.ADMIN_USERNAME &&
+            req.body.password == process.env.ADMIN_PASSWORD
+          ) {
+            res.send("Admin logged in");
+          } else {
+            res.send(req.user);
+          }
+        });
+      }
+    });
+  }
 });
 
 app
