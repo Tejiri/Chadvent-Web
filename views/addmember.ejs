@@ -312,7 +312,7 @@
       $("#addmemberform").submit(function (e) {
         e.preventDefault();
         $.ajax({
-          url: "http://localhost:3000/addmember",
+          url: "https://protected-inlet-21308.herokuapp.com/addmember",
           type: "POST",
           data: {
             username: $("#username").val(),

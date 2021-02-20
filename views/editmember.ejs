@@ -162,7 +162,7 @@
       $("#updateform").submit(function (e) {
         e.preventDefault();
         $.ajax({
-          url: "http://localhost:3000/editmember",
+          url: "https://protected-inlet-21308.herokuapp.com/editmember",
           type: "POST",
           data: {
             username: $("#username").val(),
@@ -204,7 +204,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             $.ajax({
-              url: "http://localhost:3000/editmember",
+              url: "https://protected-inlet-21308.herokuapp.com/editmember",
               type: "Delete",
               data: {
                 username: $("#username").val(),
@@ -214,7 +214,7 @@
                 if (data.message == "deleted successfully") {
                   Swal.fire("Member Deleted", "", "success");
 
-                  location.replace("http://localhost:3000/admin");
+                  location.replace("https://protected-inlet-21308.herokuapp.com/admin");
                 }
               },
 
@@ -234,7 +234,7 @@
           sweetFailure("Please select an account to be credited");
         } else {
           $.ajax({
-            url: "http://localhost:3000/editmember",
+            url: "https://protected-inlet-21308.herokuapp.com/editmember",
             type: "POST",
             data: {
               transactiontype: "credit",
@@ -268,7 +268,7 @@
           sweetFailure("Please select an account to be debited");
         } else {
           $.ajax({
-            url: "http://localhost:3000/editmember",
+            url: "https://protected-inlet-21308.herokuapp.com/editmember",
             type: "POST",
             data: {
               transactiontype: "debit",
