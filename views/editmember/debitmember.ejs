@@ -1,0 +1,83 @@
+<form action="" method="post" id="debitform">
+  <div class="container bg-info" style="padding-top: 40px">
+    <div class="row">
+      <h2 style="text-align: center">Debit Member</h2>
+    </div>
+  </div>
+
+  <div class="container form-rowaddmember bg-info">
+    <div class="row">
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <input
+          type="number"
+          name="debitamount"
+          step=".01"
+          id="debitamount"
+          placeholder="Debit Amount"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <input
+          type="text"
+          name="debitdescription"
+          id="debitdescription"
+          placeholder="Debit Description"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <input
+          class="form-control"
+          type="date"
+          name="debitdate"
+          id="debitdate"
+          required
+        />
+      </div>
+
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <select
+          id="debitselect"
+          class="form-select"
+          aria-label="Default select example"
+          name="debitselect"
+        >
+          <option selected>Open this select menu</option>
+          <option value="sharecapital">Debit Share Capital Account</option>
+          <option value="thriftsavings">Debit Thrift Savings Account</option>
+          <option value="specialdeposit">Debit Special Deposit Account</option>
+          <option value="commoditytrading">
+            Debit Commodity Trading Account
+          </option>
+          <option value="fine">Debit Fine Account</option>
+          <option value="loan">Debit Loan Account</option>
+          <option value="projectfinancing">
+            Debit Project Financing Account
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="container form-rowaddmember bg-info">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6 d-flex justify-content-center">
+        <input
+          id="debitaccount"
+          type="submit"
+          value="Debit Member Account"
+          class="btn btn-lg btn-secondary"
+          name="updatebutton"
+        />
+      </div>
+
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+</form>

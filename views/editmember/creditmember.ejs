@@ -1,0 +1,83 @@
+<form action="" method="post" id="creditform">
+  <div class="container bg-info" style="padding-top: 40px">
+    <div class="row">
+      <h2 style="text-align: center">Credit Member</h2>
+    </div>
+  </div>
+
+  <div class="container form-rowaddmember bg-info">
+    <div class="row">
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <input
+          type="number"
+          name="creditamount"
+          step=".01"
+          id="creditamount"
+          placeholder="Credit Amount"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <input
+          type="text"
+          name="creditdescription"
+          id="creditdescription"
+          placeholder="Credit Description"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <input
+          class="form-control"
+          type="date"
+          name="creditdate"
+          id="creditdate"
+          required
+        />
+      </div>
+
+      <div class="col-lg-3" style="padding-bottom: 10px;">
+        <select
+          id="creditselect"
+          class="form-select"
+          aria-label="Default select example"
+          name="creditselect"
+        >
+          <option selected>Open this select menu</option>
+          <option value="sharecapital">Credit Share Capital Account</option>
+          <option value="thriftsavings">Credit Thrift Savings Account</option>
+          <option value="specialdeposit">Credit Special Deposit Account</option>
+          <option value="commoditytrading">
+            Credit Commodity Trading Account
+          </option>
+          <option value="fine">Credit Fine Account</option>
+          <option value="loan">Credit Loan Account</option>
+          <option value="projectfinancing">
+            Credit Project Financing Account
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="container form-rowaddmember bg-info">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6 d-flex justify-content-center">
+        <input
+          id="creditaccount"
+          type="submit"
+          value="Credit Member Account"
+          class="btn btn-lg btn-secondary"
+          name="updatebutton"
+        />
+      </div>
+
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+</form>

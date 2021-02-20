@@ -1,0 +1,359 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="bootstrap-5.0.0-beta2-dist/css/bootstrap.css"
+    />
+
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <nav
+    class="navbar navbar-expand-lg navbar-light fixed-top bg-light"
+    style="background-color: white"
+  >
+    <div class="container-fluid" style="width: 100%">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#"
+          ><img src="images/chadvent-logo.png" alt="" srcset="" width="50"
+        /></a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="admin"
+              style="font-weight: bold"
+              >Admin Dashboard</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="logout"
+              style="font-weight: bold"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <body>
+    <div style="height: 100px"></div>
+    <h1
+      class="d-flex justify-content-center"
+      style="padding: 15px 0px 15px 0px"
+    >
+      Add a new Member
+    </h1>
+
+    <form action="" method="post" id="addmemberform">
+      <div class="container form-rowaddmember bg-info">
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="username" class="label-addmember">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="username" class="label-addmember">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="title" class="label-addmember">Title</label>
+            <input type="text" name="title" id="title" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container form-rowaddmember bg-info">
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="firstname" class="label-addmember">Firstname</label>
+            <input
+              type="text"
+              name="firstname"
+              id="firstname"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="lastname" class="label-addmember">Lastname</label>
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="middlename" class="label-addmember">Middlename</label>
+            <input
+              type="text"
+              name="middlename"
+              id="middlename"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="container form-rowaddmember bg-info">
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="position" class="label-addmember">Position</label>
+            <input
+              type="text"
+              name="position"
+              id="position"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="membershipstatus" class="label-addmember"
+              >Membership Status</label
+            >
+            <input
+              type="text"
+              name="membershipstatus"
+              id="membershipstatus"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="totalsavings" class="label-addmember"
+              >Total Savings</label
+            >
+            <input
+              type="number"
+              name="totalsavings"
+              id="totalsavings"
+              class="form-control"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="container form-rowaddmember bg-info">
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="lasttransaction" class="label-addmember"
+              >Last Transaction</label
+            >
+            <input
+              type="text"
+              name="lasttransaction"
+              id="lasttransaction"
+              class="form-control"
+              disabled
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="loanapplicationstatus" class="label-addmember"
+              >Loan application Status</label
+            >
+            <input
+              type="text"
+              name="loanapplicationstatus"
+              id="loanapplicationstatus"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="phonenumber" class="label-addmember"
+              >Phone Number</label
+            >
+            <input
+              type="text"
+              name="phonenumber"
+              id="phonenumber"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="container form-rowaddmember bg-info">
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="email" class="label-addmember">Email</label>
+            <input type="email" name="email" id="email" class="form-control" />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="address" class="label-addmember">Address</label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="gender" class="label-addmember">Gender</label>
+            <input type="text" name="gender" id="gender" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container form-rowaddmember bg-info">
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="occupation" class="label-addmember">Occupation</label>
+            <input
+              type="text"
+              name="occupation"
+              id="occupation"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="nextofkin" class="label-addmember">Next of Kin</label>
+            <input
+              type="text"
+              name="nextofkin"
+              id="nextofkin"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="nextofkinaddress" class="label-addmember"
+              >Next of Kin Address</label
+            >
+            <input
+              type="text"
+              name="nextofkinaddress"
+              id="nextofkinaddress"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="container form-rowaddmember bg-info">
+        <div class="row">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-6 d-flex justify-content-center">
+            <input
+              type="submit"
+              class="btn-lg btn-secondary"
+              value="Add new Member"
+              id="addmemberbutton"
+            />
+          </div>
+          <div class="col-lg-3"></div>
+        </div>
+      </div>
+    </form>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="bootstrap-5.0.0-beta2-dist/js/bootstrap.bundle.js"></script>
+
+    <script>
+      function sweetSuccess(message) {
+        return Swal.fire({
+          position: "center",
+          icon: "success",
+          title: message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      }
+
+      function sweetFailure(message) {
+        return Swal.fire({
+          position: "center",
+          icon: "error",
+          title: message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      }
+
+      $("#addmemberform").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+          url: "http://localhost:3000/addmember",
+          type: "POST",
+          data: {
+            username: $("#username").val(),
+            password: $("#password").val(),
+            title: $("#title").val(),
+            firstname: $("#firstname").val(),
+            lastname: $("#lastname").val(),
+            middlename: $("#middlename").val(),
+            position: $("#position").val(),
+            membershipstatus: $("#membershipstatus").val(),
+            totalsavings: $("#totalsavings").val(),
+            lasttransaction: $("#lasttransaction").val(),
+            loanapplicationstatus: $("#loanapplicationstatus").val(),
+            phonenumber: $("#phonenumber").val(),
+            email: $("#email").val(),
+            address: $("#address").val(),
+            gender: $("#gender").val(),
+            occupation: $("#occupation").val(),
+            nextofkin: $("#nextofkin").val(),
+            nextofkinaddress: $("#nextofkinaddress").val(),
+            updatebutton: $("#addmemberbutton").val(),
+          },
+          success: function (data) {
+            console.log(data);
+
+            if (data.name == "UserExistsError") {
+              sweetFailure("User already Exists (Username taken)");
+            } else if (data.name == "MissingPasswordError") {
+              sweetFailure("Please specify a password for this user");
+            } else if (data.name == "MissingUsernameError") {
+              sweetFailure("Please specify a username for this member");
+            } else {
+              sweetSuccess(
+                "A user with the username: " +
+                  data +
+                  " has successfully been created"
+              );
+            }
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="bootstrap-5.0.0-beta2-dist/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="datatables/DataTables-1.10.23/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="datatables/Buttons-1.6.5/css/buttons.dataTables.min.css"
+    />
+  </head>
+  <nav
+    class="navbar navbar-expand-lg navbar-light"
+    style="background-color: white"
+  >
+    <div class="container-fluid" style="width: 100%">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#"
+          ><img src="images/chadvent-logo.png" alt="" srcset="" width="50"
+        /></a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="addmember"
+              style="font-weight: bold"
+              >Add Member</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="logout"
+              style="font-weight: bold"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <body style="width: 100%">
+    <div style="height: 50px"></div>
+
+    <table id="myTable" class="display" style="width: 100%">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Middlename</th>
+          <th>Total Contribution</th>
+          <th>Edit member</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% for (let i = 0; i < memberList.length; i++) {%>
+
+        <tr>
+          <td><%=memberList[i].username %></td>
+          <td><%=memberList[i].firstname %></td>
+          <td><%=memberList[i].lastname %></td>
+          <td><%=memberList[i].middlename %></td>
+          <td>₦<%=contributionList[i] %></td>
+          <td>
+            <form action="" method="POST" id="adminform">
+              <button
+                type="submit"
+                value="Edit <%=memberList[i].username %>"
+                name="adminbutton"
+                class="btn btn-secondary"
+              >
+                Edit <%=memberList[i].username %>
+              </button>
+            </form>
+          </td>
+        </tr>
+
+        <%}%>
+      </tbody>
+    </table>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="datatables/jquery.js"></script>
+    <script src="datatables/DataTables-1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="datatables/Buttons-1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.6.5/js/buttons.html5.min.js"></script>
+    <script src="datatables/Buttons-1.6.5/js/buttons.print.min.js"></script>
+    <script src="bootstrap-5.0.0-beta2-dist/js/bootstrap.bundle.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#myTable").DataTable({
+          // dom: "Bfrtip",
+          // buttons: ["copy", "csv", "excel", "pdf", "print"],
+        });
+      });
+    </script>
+  </body>
+</html>
