@@ -33,7 +33,7 @@ mongoose.connect(
     mongoAtlasUsername +
     ":" +
     mongoAtlasPassword +
-    "@cluster0.f9vzp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "@cluster0.f9vzp.mongodb.net/chadvent",
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
