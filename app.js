@@ -1362,7 +1362,7 @@ app.route("/json/login").post(function (req, res) {
             ) {
               res.send("Admin logged in");
             } else {
-              res.send(req.user);
+              res.send({ message: "success", user: req.user });
             }
           });
         }
