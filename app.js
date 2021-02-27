@@ -28,10 +28,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoAtlasUsername = process.env.ATLAS_USERNAME;
 mongoAtlasPassword = process.env.ATLAS_PASSWORD;
 
-mongoose.connect("mongodb://localhost:27017/chadvent", {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+mongoose.connect(
+  "mongodb+srv://" +
+    mongoAtlasUsername +
+    ":" +
+    mongoAtlasPassword +
+    "@cluster0.f9vzp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  }
+);
 
 const userShema = new mongoose.Schema({
   username: String,
