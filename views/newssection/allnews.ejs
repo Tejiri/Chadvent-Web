@@ -1,0 +1,44 @@
+<div
+  class="container"
+  style="padding-top: 40px; padding-bottom: 20px; margin-top: 40px"
+>
+  <div class="row" style="padding-bottom: 40px">
+    <h2 style="text-align: center">
+      <strong>All news currently posted</strong>
+    </h2>
+  </div>
+
+  <hr>
+
+  <% for (var key =0;key < newsList.length; key++) { %>
+
+  <div class="row">
+    <input
+      type="number"
+      name="selectednews"
+      class="newsselected"
+      value="<%=newsList[key].id%>"
+      style="visibility: hidden;"
+    />
+
+    <div class="col-lg-2"></div>
+    <div
+      class="col-lg-8 card  border-dark"
+      style="background-color: rgb(211, 225, 226)"
+    >
+      <div class="card-body">
+        <h3 class="card-title" id="newstitle">
+          Title: <%=newsList[key].title %>
+        </h3>
+        <hr style="height: 3px; background-color: black; border: none;">
+        <p>Date posted: <%=newsList[key].date %></p>
+        <p class="card-text">Body: <%=newsList[key].content %></p>
+        <Button class="btn btn-primary bg-danger deletenews" value="<%=newsList[key].id%>">Delete news</Button>
+      
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+
+  <% }%>
+</div>

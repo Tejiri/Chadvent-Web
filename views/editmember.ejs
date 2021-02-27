@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Edit Member</title>
 
     <link
       rel="stylesheet"
@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css"
     />
+    <link rel="icon" href="images/chadvent-logo.png">
   </head>
 
   <nav
@@ -44,6 +45,16 @@
               href="admin"
               style="font-weight: bold"
               >Admin Dashboard</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="newssection"
+              style="font-weight: bold"
+              >News Section</a
             >
           </li>
 
@@ -162,7 +173,7 @@
       $("#updateform").submit(function (e) {
         e.preventDefault();
         $.ajax({
-          url: "https://protected-inlet-21308.herokuapp.com/editmember",
+          url: "http://localhost:3000/editmember",
           type: "POST",
           data: {
             username: $("#username").val(),
@@ -172,7 +183,6 @@
             middlename: $("#middlename").val(),
             position: $("#position").val(),
             membershipstatus: $("#membershipstatus").val(),
-            lasttransaction: $("#lasttransaction").val(),
             loanapplicationstatus: $("#loanapplicationstatus").val(),
             phonenumber: $("#phonenumber").val(),
             email: $("#email").val(),
@@ -204,7 +214,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             $.ajax({
-              url: "https://protected-inlet-21308.herokuapp.com/editmember",
+              url: "http://localhost:3000/editmember",
               type: "Delete",
               data: {
                 username: $("#username").val(),
@@ -214,7 +224,7 @@
                 if (data.message == "deleted successfully") {
                   Swal.fire("Member Deleted", "", "success");
 
-                  location.replace("https://protected-inlet-21308.herokuapp.com/admin");
+                  location.replace("http://localhost:3000/admin");
                 }
               },
 
@@ -234,7 +244,7 @@
           sweetFailure("Please select an account to be credited");
         } else {
           $.ajax({
-            url: "https://protected-inlet-21308.herokuapp.com/editmember",
+            url: "http://localhost:3000/editmember",
             type: "POST",
             data: {
               transactiontype: "credit",
@@ -268,7 +278,7 @@
           sweetFailure("Please select an account to be debited");
         } else {
           $.ajax({
-            url: "https://protected-inlet-21308.herokuapp.com/editmember",
+            url: "http://localhost:3000/editmember",
             type: "POST",
             data: {
               transactiontype: "debit",

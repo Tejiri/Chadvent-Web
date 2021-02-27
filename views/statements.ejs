@@ -1,0 +1,479 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Statement</title>
+
+    <link
+      rel="stylesheet"
+      href="bootstrap-5.0.0-beta2-dist/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="datatables/DataTables-1.10.23/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="datatables/Buttons-1.6.5/css/buttons.dataTables.min.css"
+    />
+    <link rel="icon" href="images/chadvent-logo.png" />
+
+    <style>
+      table.blueTable {
+        border: 1px solid #1c6ea4;
+        background-color: #eeeeee;
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+      }
+      table.blueTable td,
+      table.blueTable th {
+        border: 1px solid #aaaaaa;
+        padding: 3px 2px;
+      }
+      table.blueTable tbody td {
+        font-size: 13px;
+      }
+      table.blueTable tr:nth-child(even) {
+        background: #d0e4f5;
+      }
+      table.blueTable thead {
+        background: #1c6ea4;
+        background: -moz-linear-gradient(
+          top,
+          #5592bb 0%,
+          #327cad 66%,
+          #1c6ea4 100%
+        );
+        background: -webkit-linear-gradient(
+          top,
+          #5592bb 0%,
+          #327cad 66%,
+          #1c6ea4 100%
+        );
+        background: linear-gradient(
+          to bottom,
+          #5592bb 0%,
+          #327cad 66%,
+          #1c6ea4 100%
+        );
+        border-bottom: 2px solid #444444;
+      }
+      table.blueTable thead th {
+        font-size: 15px;
+        font-weight: bold;
+        color: #ffffff;
+        border-left: 2px solid #d0e4f5;
+      }
+      table.blueTable thead th:first-child {
+        border-left: none;
+      }
+
+      table.blueTable tfoot {
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffffff;
+        background: #d0e4f5;
+        background: -moz-linear-gradient(
+          top,
+          #dcebf7 0%,
+          #d4e6f6 66%,
+          #d0e4f5 100%
+        );
+        background: -webkit-linear-gradient(
+          top,
+          #dcebf7 0%,
+          #d4e6f6 66%,
+          #d0e4f5 100%
+        );
+        background: linear-gradient(
+          to bottom,
+          #dcebf7 0%,
+          #d4e6f6 66%,
+          #d0e4f5 100%
+        );
+        border-top: 2px solid #444444;
+      }
+      table.blueTable tfoot td {
+        font-size: 14px;
+      }
+      table.blueTable tfoot .links {
+        text-align: right;
+      }
+      table.blueTable tfoot .links a {
+        display: inline-block;
+        background: #1c6ea4;
+        color: #ffffff;
+        padding: 2px 8px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <nav
+    class="navbar navbar-expand-lg navbar-light"
+    style="background-color: white"
+  >
+    <div class="container-fluid" style="width: 100%">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#"
+          ><img src="images/chadvent-logo.png" alt="" srcset="" width="50"
+        /></a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="profile"
+              style="font-weight: bold"
+              >Back to profile</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="logout"
+              style="font-weight: bold"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <body>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="totalcontributiontab"
+          data-bs-toggle="pill"
+          data-bs-target="#totalcontribution"
+          type="button"
+          role="tab"
+          aria-controls="pills-home"
+          aria-selected="true"
+        >
+          Total Contribution Account Statement
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="commoditytradingtab"
+          data-bs-toggle="pill"
+          data-bs-target="#commoditytrading"
+          type="button"
+          role="tab"
+          aria-controls="pills-home"
+          aria-selected="false"
+        >
+          Commodity Trading Statement
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="finetab"
+          data-bs-toggle="pill"
+          data-bs-target="#fine"
+          type="button"
+          role="tab"
+          aria-controls="pills-profile"
+          aria-selected="false"
+        >
+          Fine Statement
+        </button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="loantab"
+          data-bs-toggle="pill"
+          data-bs-target="#loan"
+          type="button"
+          role="tab"
+          aria-controls="pills-profile"
+          aria-selected="false"
+        >
+          Loan Statement
+        </button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="projectfinancingtab"
+          data-bs-toggle="pill"
+          data-bs-target="#projectfinancing"
+          type="button"
+          role="tab"
+          aria-controls="pills-profile"
+          aria-selected="false"
+        >
+          Project Financing Statement
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="totalcontribution"
+        role="tabpanel"
+        aria-labelledby="totalcontributiontab"
+      >
+        <%-include("statements/totalcontributionaccountstatement.ejs") -%>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="commoditytrading"
+        role="tabpanel"
+        aria-labelledby="commoditytradingtab"
+      >
+        <%-include("statements/commoditytradingstatement.ejs") -%>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="fine"
+        role="tabpanel"
+        aria-labelledby="finetab"
+      >
+        <%-include("statements/finestatement.ejs") -%>
+      </div>
+
+      <div
+        class="tab-pane fade"
+        id="loan"
+        role="tabpanel"
+        aria-labelledby="loantab"
+      >
+        <%-include("statements/loanstatement.ejs") -%>
+      </div>
+
+      <div
+        class="tab-pane fade"
+        id="projectfinancing"
+        role="tabpanel"
+        aria-labelledby="projectfinancingtab"
+      >
+        <%-include("statements/projectfinancingstatement.ejs") -%>
+      </div>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="datatables/jquery.js"></script>
+    <script src="datatables/DataTables-1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="datatables/Buttons-1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="datatables/Buttons-1.6.5/js/buttons.html5.min.js"></script>
+    <script src="datatables/Buttons-1.6.5/js/buttons.print.min.js"></script>
+    <script src="bootstrap-5.0.0-beta2-dist/js/bootstrap.bundle.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#loanTable").DataTable({
+          info: false,
+          responsive: true,
+          dom: "lfrtiBp",
+          buttons: [
+            {
+              extend: "copy",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "csv",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "excel",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "pdf",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "print",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+          ],
+          lengthMenu: [5, 10, 25, 50, 75, 100],
+
+          //"csv", "excel", "pdf", "print",
+        });
+      });
+
+      $(document).ready(function () {
+        $("#commodityTradingTable").DataTable({
+          info: false,
+          responsive: true,
+          dom: "lfrtiBp",
+          buttons: [
+            {
+              extend: "copy",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "csv",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "excel",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "pdf",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "print",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+          ],
+          lengthMenu: [5, 10, 25, 50, 75, 100],
+
+          //"csv", "excel", "pdf", "print",
+        });
+      });
+
+      $(document).ready(function () {
+        $("#fineTable").DataTable({
+          info: false,
+          responsive: true,
+          dom: "lfrtiBp",
+          buttons: [
+            {
+              extend: "copy",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "csv",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "excel",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "pdf",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "print",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+          ],
+          lengthMenu: [5, 10, 25, 50, 75, 100],
+
+          //"csv", "excel", "pdf", "print",
+        });
+      });
+
+      $(document).ready(function () {
+        $("#projectFinancingTable").DataTable({
+          info: false,
+          responsive: true,
+          dom: "lfrtiBp",
+          buttons: [
+            {
+              extend: "copy",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "csv",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "excel",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "pdf",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "print",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+          ],
+          lengthMenu: [5, 10, 25, 50, 75, 100],
+
+          //"csv", "excel", "pdf", "print",
+        });
+      });
+
+      $(document).ready(function () {
+        $("#totalContributionTable").DataTable({
+          info: false,
+          responsive: true,
+          dom: "lfrtiBp",
+          buttons: [
+            {
+              extend: "copy",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "csv",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "excel",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "pdf",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+            {
+              extend: "print",
+              messageTop: "guguiguguguiguigui",
+              title: "My Account Statement",
+            },
+          ],
+          lengthMenu: [5, 10, 25, 50, 75, 100],
+
+          //"csv", "excel", "pdf", "print",
+        });
+      });
+    </script>
+  </body>
+</html>

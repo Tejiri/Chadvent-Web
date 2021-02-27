@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-center">
+      <h2>Project Financing Account Statement</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <table id="projectFinancingTable" class="display blueTable" style="width: 100%">
+    <thead>
+      <tr>
+        <th>S/N</th>
+        <th>Date</th>
+        <th>Narration</th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th>Project Financing Account Balance</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%let x = 1 %> <% for (const key in projectfinancingstatement) { %>
+      <%if(projectfinancingstatement[key].transactiontype == "credit"){%>
+      <tr>
+        <td><%=x%></td>
+        <td><%=projectfinancingstatement[key].date%></td>
+        <td><%=projectfinancingstatement[key].narration%></td>
+        <td>0</td>
+        <td>₦<%=projectfinancingstatement[key].amount%></td>
+        <td>₦<%=projectfinancingstatement[key].balance%></td>
+      </tr>
+
+      <%}else{%>
+
+      <tr>
+        <td><%=x%></td>
+        <td><%=projectfinancingstatement[key].date%></td>
+        <td><%=projectfinancingstatement[key].narration%></td>
+        <td>₦<%=projectfinancingstatement[key].amount%></td>
+        <td>0</td>
+        <td>₦<%=projectfinancingstatement[key].balance%></td>
+      </tr>
+
+      <%}%> <%x++%> <%}%>
+    </tbody>
+  </table>
+</div>
