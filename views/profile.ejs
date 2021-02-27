@@ -1301,7 +1301,7 @@
           if (result.isConfirmed) {
             if ($("#newpassword").val() == result.value) {
               $.ajax({
-                url: "http://localhost:3000/profile",
+                url: "https://chadventmpcs.herokuapp.com/profile",
                 method: "POST",
                 data: {
                   newpassword: $("#newpassword").val(),
