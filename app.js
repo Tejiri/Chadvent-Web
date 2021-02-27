@@ -250,7 +250,7 @@ app
   })
   .post(function (req, res) {
     if (req.body.username == "" || req.body.password == "") {
-      res.redirect("admin");
+      res.status(204).send();
     } else {
       const user = new userModel({
         username: req.body.username,
