@@ -291,8 +291,9 @@
           timer: 3000,
         });
         setTimeout(function () {
-          location.reload();
-        }, 3000);
+                    location.reload(true);
+                  }, 3000);
+        
       }
 
       function sweetFailure(message) {
@@ -303,10 +304,6 @@
           showConfirmButton: false,
           timer: 3000,
         });
-
-        setTimeout(function () {
-          location.reload();
-        }, 3000);
       }
 
       $("#updateform").submit(function (e) {
