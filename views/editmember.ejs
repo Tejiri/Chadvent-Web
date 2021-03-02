@@ -290,10 +290,6 @@
           showConfirmButton: false,
           timer: 3000,
         });
-        setTimeout(function () {
-                    location.reload(true);
-                  }, 3000);
-        
       }
 
       function sweetFailure(message) {
@@ -332,6 +328,9 @@
           success: function (data) {
             console.log(data);
             sweetSuccess("Member account updated");
+            setTimeout(function () {
+              location.reload(true);
+            }, 2000);
           },
 
           fail: function (xhr, textStatus, errorThrown) {
@@ -396,6 +395,9 @@
                 sweetSuccess(
                   "Member has been credited with " + $("#creditamount").val()
                 );
+                setTimeout(function () {
+                    location.reload(true);
+                  }, 2000);
               }
             },
 
@@ -429,6 +431,9 @@
                 sweetSuccess(
                   "Member has been debited with " + $("#debitamount").val()
                 );
+                setTimeout(function () {
+                    location.reload(true);
+                  }, 2000);
               }
             },
 
