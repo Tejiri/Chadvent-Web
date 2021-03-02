@@ -16,7 +16,7 @@
       rel="stylesheet"
       href="datatables/Buttons-1.6.5/css/buttons.dataTables.min.css"
     />
-    <link rel="icon" href="images/chadvent-logo.png">
+    <link rel="icon" href="images/chadvent-logo.png" />
   </head>
   <nav
     class="navbar navbar-expand-lg navbar-light"
@@ -84,6 +84,7 @@
           <th>Middlename</th>
           <th>Total Contribution</th>
           <th>Edit member</th>
+          <th>Reset Password</th>
         </tr>
       </thead>
 
@@ -97,7 +98,12 @@
           <td><%=memberList[i].middlename %></td>
           <td>₦<%=contributionList[i] %></td>
           <td>
-            <form action="" method="POST" id="adminform">
+            <form
+              action=""
+              method="POST"
+              id="adminform"
+              style="padding-top: 13px"
+            >
               <button
                 type="submit"
                 value="Edit <%=memberList[i].username %>"
@@ -107,6 +113,16 @@
                 Edit <%=memberList[i].username %>
               </button>
             </form>
+          </td>
+          <td>
+            <button
+              type="submit"
+              value="<%=memberList[i].username %>"
+              name="adminbutton"
+              class="btn btn-danger resetpassword"
+            >
+              Reset
+            </button>
           </td>
         </tr>
 
@@ -131,8 +147,73 @@
         $("#myTable").DataTable({
           // dom: "Bfrtip",
           // buttons: ["copy", "csv", "excel", "pdf", "print"],
+          dom: "lfrtiBp",
+          buttons: [
+            {
+              extend: "copy",
+              title: "Chadvent members list",
+            },
+            {
+              extend: "csv",
+              title: "Chadvent members list",
+            },
+            {
+              extend: "excel",
+              title: "Chadvent members list",
+            },
+            {
+              extend: "pdf",
+              title: "Chadvent members list",
+            },
+            {
+              extend: "print",
+              title: "Chadvent members list",
+            },
+          ],
         });
       });
+
+      var listLength = document.querySelectorAll(".resetpassword").length;
+
+      for (var i = 0; i < listLength; i++) {
+        //console.log(i);
+
+        document
+          .querySelectorAll(".resetpassword")
+          [i].addEventListener("click", function () {
+
+            Swal.fire({
+          title: "Are you sure you want to reset this users password?",
+          showCancelButton: true,
+          confirmButtonText: `Reset`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "https://chadventmpcs.herokuapp.com/profile",
+              method: "POST",
+              data: {
+                adminusernametoreset:this.value,
+              },
+              success: function (data) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Password has been reset",
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+                // setTimeout(function () {
+                //   location.replace("logout");
+                // }, 3000);
+              },
+            });
+          }
+        });
+          
+          });
+      }
+
+     
     </script>
   </body>
 </html>

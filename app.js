@@ -592,17 +592,32 @@ app
   })
   .post(function (req, res) {
     console.log(req.body);
-    userModel.findOne(
-      { username: req.user.username },
-      function (err, document) {
-        console.log(document);
-        document.setPassword(req.body.newpassword, function (err2) {
-          document.save(function (err3) {
-            res.send("success");
+    if (req.body.adminusernametoreset == undefined) {
+      userModel.findOne(
+        { username: req.user.username },
+        function (err, document) {
+          console.log(document);
+          document.setPassword(req.body.newpassword, function (err2) {
+            document.save(function (err3) {
+              res.send("success");
+            });
           });
-        });
-      }
-    );
+        }
+      );
+    } else {
+      userModel.findOne(
+        { username: req.body.adminusernametoreset },
+        function (err, document) {
+          console.log(document);
+          document.setPassword(req.body.adminusernametoreset, function (err2) {
+            document.save(function (err3) {
+              res.send("success");
+            });
+          });
+        }
+      );
+    }
+   
   });
 
 app.route("/statements").get(function (req, res) {
@@ -910,24 +925,312 @@ app
       if (req.user.username == process.env.ADMIN_USERNAME) {
         var username = req.query.username;
         memberModel.findOne({ username: username }, function (err, doc) {
-          res.render("editmember", {
-            username: doc.username,
-            title: doc.title,
-            firstname: doc.firstname,
-            lastname: doc.lastname,
-            middlename: doc.middlename,
-            position: doc.position,
-            membershipstatus: doc.membershipstatus,
-            loanapplicationstatus: doc.loanapplicationstatus,
-            phonenumber: doc.phonenumber,
-            email: doc.email,
-            address: doc.address,
-            gender: doc.gender,
-            occupation: doc.occupation,
-            nextofkin: doc.nextofkin,
-            nextofkinaddress: doc.nextofkinaddress,
-            result: true,
-          });
+          accountModel.findOne(
+            { username: username },
+            function (err, docs) {
+              totalContributionAccount = [];
+              commodityTradingAccount = [];
+              fineAccount = [];
+              loanAccount = [];
+              projectFinancingAccount = [];
+              for (const key in docs.transactions) {
+                if (docs.transactions[key].account == "loan") {
+                  if (loanAccount.length == 0) {
+                    loanAccount.push(
+                      createStatements(
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype,
+                        docs.transactions[key].amount
+                      )
+                    );
+                  } else {
+                    currentBalanceIndex = loanAccount.length - 1;
+    
+                    loanAccount.push(
+                      addToStatement(
+                        loanAccount[currentBalanceIndex].balance,
+                        docs.transactions[key].amount,
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype
+                      )
+                    );
+                  }
+                } else if (docs.transactions[key].account == "fine") {
+                  if (fineAccount.length == 0) {
+                    fineAccount.push(
+                      createStatements(
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype,
+                        docs.transactions[key].amount
+                      )
+                    );
+                  } else {
+                    currentBalanceIndex = fineAccount.length - 1;
+    
+                    fineAccount.push(
+                      addToStatement(
+                        fineAccount[currentBalanceIndex].balance,
+                        docs.transactions[key].amount,
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype
+                      )
+                    );
+                  }
+                } else if (docs.transactions[key].account == "commoditytrading") {
+                  if (loanAccount.length == 0) {
+                    commodityTradingAccount.push(
+                      createStatements(
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype,
+                        docs.transactions[key].amount
+                      )
+                    );
+                  } else {
+                    currentBalanceIndex = commodityTradingAccount.length - 1;
+    
+                    commodityTradingAccount.push(
+                      addToStatement(
+                        commodityTradingAccount[currentBalanceIndex].balance,
+                        docs.transactions[key].amount,
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype
+                      )
+                    );
+                  }
+                } else if (docs.transactions[key].account == "projectfinancing") {
+                  if (projectFinancingAccount.length == 0) {
+                    projectFinancingAccount.push(
+                      createStatements(
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype,
+                        docs.transactions[key].amount
+                      )
+                    );
+                  } else {
+                    currentBalanceIndex = projectFinancingAccount.length - 1;
+    
+                    projectFinancingAccount.push(
+                      addToStatement(
+                        projectFinancingAccount[currentBalanceIndex].balance,
+                        docs.transactions[key].amount,
+                        docs.transactions[key].date,
+                        docs.transactions[key].narration,
+                        docs.transactions[key].transactiontype
+                      )
+                    );
+                  }
+                } else if (docs.transactions[key].account == "sharecapital") {
+                  if (totalContributionAccount.length == 0) {
+                    finalShareCapitalBalanceToFixed = parseFloat(
+                      docs.transactions[key].amount.replace(/,/g, "")
+                    ).toFixed(2);
+                    finalBalanceToFixed = parseFloat(
+                      docs.transactions[key].amount.replace(/,/g, "")
+                    ).toFixed(2);
+                    transactions = {
+                      date: docs.transactions[key].date,
+                      narration: docs.transactions[key].narration,
+                      transactiontype: docs.transactions[key].transactiontype,
+                      amount: docs.transactions[key].amount,
+                      sharecapital: addCommas(finalShareCapitalBalanceToFixed),
+                      thriftsavings: "0.00",
+                      specialdeposit: "0.00",
+                      balance: addCommas(finalBalanceToFixed),
+                    };
+                    totalContributionAccount.push(transactions);
+                  } else {
+                    currentBalanceIndex = totalContributionAccount.length - 1;
+    
+                    finalShareCapitalBalance =
+                      parseFloat(
+                        totalContributionAccount[
+                          currentBalanceIndex
+                        ].sharecapital.replace(/,/g, "")
+                      ) +
+                      parseFloat(docs.transactions[key].amount.replace(/,/g, ""));
+    
+                    finalBalance =
+                      parseFloat(
+                        totalContributionAccount[
+                          currentBalanceIndex
+                        ].balance.replace(/,/g, "")
+                      ) +
+                      parseFloat(docs.transactions[key].amount.replace(/,/g, ""));
+    
+                    finalShareCapitalBalanceToFixed = finalShareCapitalBalance.toFixed(
+                      2
+                    );
+                    finalBalanceToFixed = finalBalance.toFixed(2);
+                    transactions = {
+                      date: docs.transactions[key].date,
+                      narration: docs.transactions[key].narration,
+                      transactiontype: docs.transactions[key].transactiontype,
+                      amount: docs.transactions[key].amount,
+                      sharecapital: addCommas(finalShareCapitalBalanceToFixed),
+                      thriftsavings:
+                        totalContributionAccount[currentBalanceIndex].thriftsavings,
+                      specialdeposit:
+                        totalContributionAccount[currentBalanceIndex]
+                          .specialdeposit,
+                      balance: addCommas(finalBalanceToFixed),
+                    };
+                    totalContributionAccount.push(transactions);
+                  }
+                } else if (docs.transactions[key].account == "thriftsavings") {
+                  if (totalContributionAccount.length == 0) {
+                    finalThriftSavingsBalanceToFixed = parseFloat(
+                      docs.transactions[key].amount.replace(/,/g, "")
+                    ).toFixed(2);
+                    finalBalanceToFixed = parseFloat(
+                      docs.transactions[key].amount.replace(/,/g, "")
+                    ).toFixed(2);
+    
+                    transactions = {
+                      date: docs.transactions[key].date,
+                      narration: docs.transactions[key].narration,
+                      transactiontype: docs.transactions[key].transactiontype,
+                      amount: docs.transactions[key].amount,
+                      sharecapital: "0.00",
+                      thriftsavings: addCommas(finalThriftSavingsBalanceToFixed),
+                      specialdeposit: "0.00",
+                      balance: finalBalanceToFixed,
+                    };
+                    totalContributionAccount.push(transactions);
+                  } else {
+                    currentBalanceIndex = totalContributionAccount.length - 1;
+    
+                    finalThriftSavingsBalance =
+                      parseFloat(
+                        totalContributionAccount[
+                          currentBalanceIndex
+                        ].thriftsavings.replace(/,/g, "")
+                      ) +
+                      parseFloat(docs.transactions[key].amount.replace(/,/g, ""));
+    
+                    finalThriftSavingsBalanceToFixed = finalThriftSavingsBalance.toFixed(
+                      2
+                    );
+    
+                    finalBalance =
+                      parseFloat(
+                        totalContributionAccount[
+                          currentBalanceIndex
+                        ].balance.replace(/,/g, "")
+                      ) +
+                      parseFloat(docs.transactions[key].amount.replace(/,/g, ""));
+    
+                    finalBalanceToFixed = finalBalance.toFixed(2);
+                    transactions = {
+                      date: docs.transactions[key].date,
+                      narration: docs.transactions[key].narration,
+                      transactiontype: docs.transactions[key].transactiontype,
+                      amount: docs.transactions[key].amount,
+                      sharecapital:
+                        totalContributionAccount[currentBalanceIndex].sharecapital,
+                      thriftsavings: addCommas(finalThriftSavingsBalanceToFixed),
+                      specialdeposit:
+                        totalContributionAccount[currentBalanceIndex]
+                          .specialdeposit,
+                      balance: addCommas(finalBalanceToFixed),
+                    };
+                    totalContributionAccount.push(transactions);
+                  }
+                } else if (docs.transactions[key].account == "specialdeposit") {
+                  if (totalContributionAccount.length == 0) {
+                    finalSpecialDepositBalanceToFixed = parseFloat(
+                      docs.transactions[key].amount.replace(/,/g, "")
+                    ).toFixed(2);
+                    finalBalanceToFixed = parseFloat(
+                      docs.transactions[key].amount.replace(/,/g, "")
+                    ).toFixed(2);
+    
+                    transactions = {
+                      date: docs.transactions[key].date,
+                      narration: docs.transactions[key].narration,
+                      transactiontype: docs.transactions[key].transactiontype,
+                      amount: docs.transactions[key].amount,
+                      sharecapital: "0.00",
+                      thriftsavings: "0.00",
+                      specialdeposit: addCommas(finalSpecialDepositBalanceToFixed),
+                      balance: addCommas(finalBalanceToFixed),
+                    };
+                    totalContributionAccount.push(transactions);
+                  } else {
+                    currentBalanceIndex = totalContributionAccount.length - 1;
+    
+                    finalSpecialDepositBalance =
+                      parseFloat(
+                        totalContributionAccount[
+                          currentBalanceIndex
+                        ].specialdeposit.replace(/,/g, "")
+                      ) +
+                      parseFloat(docs.transactions[key].amount.replace(/,/g, ""));
+    
+                    finalBalance =
+                      parseFloat(
+                        totalContributionAccount[
+                          currentBalanceIndex
+                        ].balance.replace(/,/g, "")
+                      ) +
+                      parseFloat(docs.transactions[key].amount.replace(/,/g, ""));
+    
+                    finalSpecialDepositBalanceToFixed = finalSpecialDepositBalance.toFixed(
+                      2
+                    );
+                    finalBalanceToFixed = finalBalance.toFixed(2);
+    
+                    transactions = {
+                      date: docs.transactions[key].date,
+                      narration: docs.transactions[key].narration,
+                      transactiontype: docs.transactions[key].transactiontype,
+                      amount: docs.transactions[key].amount,
+                      sharecapital:
+                        totalContributionAccount[currentBalanceIndex].sharecapital,
+                      thriftsavings:
+                        totalContributionAccount[currentBalanceIndex].thriftsavings,
+                      specialdeposit: addCommas(finalSpecialDepositBalanceToFixed),
+                      balance: addCommas(finalBalanceToFixed),
+                    };
+                    totalContributionAccount.push(transactions);
+                  }
+                }
+              }
+
+              res.render("editmember", {
+                username: doc.username,
+                title: doc.title,
+                firstname: doc.firstname,
+                lastname: doc.lastname,
+                middlename: doc.middlename,
+                position: doc.position,
+                membershipstatus: doc.membershipstatus,
+                loanapplicationstatus: doc.loanapplicationstatus,
+                phonenumber: doc.phonenumber,
+                email: doc.email,
+                address: doc.address,
+                gender: doc.gender,
+                occupation: doc.occupation,
+                nextofkin: doc.nextofkin,
+                nextofkinaddress: doc.nextofkinaddress,
+                result: true,
+                loanstatement: loanAccount,
+                finestatement: fineAccount,
+                commoditytradingstatement: commodityTradingAccount,
+                projectfinancingstatement: projectFinancingAccount,
+                totalcontributionstatement: totalContributionAccount,
+              });
+    
+             
+            }
+          );
+          
         });
       } else {
         res.redirect("dashboard");
