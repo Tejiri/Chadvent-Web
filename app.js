@@ -242,11 +242,6 @@ function addToStatement(
 
   return accountStatement;
 }
-app.get('*', function(req, res) {  
-  res.redirect('https://' + req.headers.host + req.url);
-
- 
-})
 
 app
   .route("/")
