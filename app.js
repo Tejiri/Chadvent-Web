@@ -244,9 +244,9 @@ function addToStatement(
 }
 
 app
-  .route("https://chadventmpcs.herokuapp.com")
+  .route("/")
   .get(function (req, res) {
-    
+    // res.redirect('https://' + req.headers.host);
     res.render("login");
   })
   .post(function (req, res) {
