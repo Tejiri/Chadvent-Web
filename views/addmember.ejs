@@ -239,7 +239,7 @@
 
       <div class="container form-rowaddmember bg-info">
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-4">
             <label for="nextofkinaddress" class="label-addmember"
               >Next of Kin Address</label
             >
@@ -247,6 +247,28 @@
               type="text"
               name="nextofkinaddress"
               id="nextofkinaddress"
+              class="form-control"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label for="bank" class="label-addmember"
+              >Bank</label
+            >
+            <input
+              type="text"
+              name="bank"
+              id="bank"
+              class="form-control"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label for="accountnumber" class="label-addmember"
+              >Account Number</label
+            >
+            <input
+              type="text"
+              name="accountnumber"
+              id="accountnumber"
               class="form-control"
             />
           </div>
@@ -316,6 +338,8 @@
             occupation: $("#occupation").val(),
             nextofkin: $("#nextofkin").val(),
             nextofkinaddress: $("#nextofkinaddress").val(),
+            bank: $("#bank").val(),
+            accountnumber: $("#accountnumber").val(),
             updatebutton: $("#addmemberbutton").val(),
           },
           success: function (data) {

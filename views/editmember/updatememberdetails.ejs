@@ -90,10 +90,6 @@
       />
     </div>
 
-  
-
-   
-
     <div class="col-lg-4">
       <label for="loanapplicationstatus" class="label-addmember"
         >Loan application Status</label
@@ -117,16 +113,11 @@
         value="<%=phonenumber %>"
       />
     </div>
-
   </div>
 </div>
 
 <div class="container form-rowaddmember bg-info">
   <div class="row">
-    
-
-    
-
     <div class="col-lg-4">
       <label for="email" class="label-addmember">Email</label>
       <input
@@ -164,10 +155,6 @@
 
 <div class="container form-rowaddmember bg-info">
   <div class="row">
-   
-
-   
-
     <div class="col-lg-4">
       <label for="occupation" class="label-addmember">Occupation</label>
       <input
@@ -204,14 +191,39 @@
   </div>
 </div>
 
+<div class="container form-rowaddmember bg-info">
+  <div class="row">
+    <div class="col-lg-6">
+      <label for="bank" class="label-addmember">Bank</label>
+      <input
+        type="text"
+        name="bank"
+        id="bank"
+        class="form-control"
+        value="<%=bank %>"
+      />
+    </div>
+    <div class="col-lg-6">
+      <label for="accountnumber" class="label-addmember">Account Number</label>
+      <input
+        type="text"
+        name="accountnumber"
+        id="accountnumber"
+        class="form-control"
+        value="<%=accountnumber %>"
+      />
+    </div>
+  </div>
+</div>
 
 <div class="container form-rowaddmember bg-info">
   <div class="row">
-    <div class="col-lg-2">
-
-    </div>
-    <div class="col-lg-4 d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
-      <form action="" method="post" id="updateform" style="margin: 0px;">
+    <div class="col-lg-2"></div>
+    <div
+      class="col-lg-4 d-flex justify-content-center"
+      style="margin: 20px 0px 20px 0px"
+    >
+      <form action="" method="post" id="updateform" style="margin: 0px">
         <input
           id="updatemember"
           type="submit"
@@ -221,7 +233,10 @@
         />
       </form>
     </div>
-    <div class="col-lg-4 d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+    <div
+      class="col-lg-4 d-flex justify-content-center"
+      style="margin: 20px 0px 20px 0px"
+    >
       <input
         id="deletemember"
         type="submit"
@@ -230,8 +245,6 @@
         name="updatebutton"
       />
     </div>
-    <div class="col-lg-2">
-
-    </div>
+    <div class="col-lg-2"></div>
   </div>
 </div>

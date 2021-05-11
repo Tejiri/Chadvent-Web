@@ -61,6 +61,8 @@ const memberSchema = new mongoose.Schema({
   occupation: String,
   nextofkin: String,
   nextofkinaddress: String,
+  bank: String,
+  accountnumber: String,
 });
 
 const accountSchema = new mongoose.Schema({
@@ -246,8 +248,6 @@ function addToStatement(
 app
   .route("/")
   .get(function (req, res) {
-    console.log(req.protocol);
-
     res.render("login");
   })
   .post(function (req, res) {
@@ -353,6 +353,7 @@ app
     }
   })
   .post(function (req, res) {
+    console.log(req.body);
     userModel.register(
       { username: req.body.username },
       req.body.password,
@@ -377,6 +378,8 @@ app
             occupation: req.body.occupation,
             nextofkin: req.body.nextofkin,
             nextofkinaddress: req.body.nextofkinaddress,
+            bank: req.body.bank,
+            accountnumber: req.body.accountnumber,
           });
           createMember.save();
 
@@ -472,6 +475,8 @@ app
             occupation = doc.occupation;
             nextofkin = doc.nextofkin;
             nextofkinaddress = doc.nextofkinaddress;
+            bank = doc.bank;
+            accountnumber = doc.accountnumber;
 
             accountModel.findOne(
               { username: req.user.username },
@@ -569,6 +574,8 @@ app
                       occupation: occupation,
                       nextofkin: nextofkin,
                       nextofkinaddress: nextofkinaddress,
+                      bank: bank,
+                      accountnumber:accountnumber,
                       sharecapital: sharecapital,
                       thriftsavings: thriftsavings,
                       specialdeposit: specialdeposit,
@@ -1220,6 +1227,8 @@ app
               occupation: doc.occupation,
               nextofkin: doc.nextofkin,
               nextofkinaddress: doc.nextofkinaddress,
+              bank:doc.bank,
+              accountnumber:doc.accountnumber,
               result: true,
               loanstatement: loanAccount,
               finestatement: fineAccount,
@@ -1237,7 +1246,9 @@ app
     }
   })
   .post(function (req, res) {
+    console.log(req.body);
     if (req.body.updatebutton === "Update User") {
+      
       memberModel.updateOne(
         { username: req.body.username },
         {
@@ -1256,6 +1267,8 @@ app
           occupation: req.body.occupation,
           nextofkin: req.body.nextofkin,
           nextofkinaddress: req.body.nextofkinaddress,
+          bank:req.body.bank,
+          accountnumber: req.body.accountnumber
         },
         function (err, result) {
           if (err) {
