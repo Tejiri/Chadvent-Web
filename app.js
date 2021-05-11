@@ -249,7 +249,7 @@ app
     if (req.secure) {
       res.render("login");
     } else {
-      res.redirect("https://" + req.headers.host);
+      res.redirect("/");
     }
   })
   .post(function (req, res) {
