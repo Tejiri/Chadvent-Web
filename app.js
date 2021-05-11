@@ -24,10 +24,10 @@ app.use(enforce.HTTPS());
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.listen(process.env.PORT || 3000);
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
+http.createServer(app).listen(process.env.PORT || 3000);
 mongoAtlasUsername = process.env.ATLAS_USERNAME;
 mongoAtlasPassword = process.env.ATLAS_PASSWORD;
 
