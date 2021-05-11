@@ -246,10 +246,10 @@ function addToStatement(
 app
   .route("/")
   .get(function (req, res) {
-    if (req.secure) {
+    if (req.secure == true) {
       res.render("login");
     } else {
-      res.redirect("/");
+      res.redirect("https://" + req.headers.host);
     }
   })
   .post(function (req, res) {
