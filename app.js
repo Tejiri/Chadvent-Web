@@ -5,8 +5,6 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-const http = require('http');
-const enforce = require('express-sslify');
 
 const app = express();
 
@@ -20,14 +18,13 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(enforce.HTTPS());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.listen(process.env.PORT || 3000);
 
 app.use(bodyParser.urlencoded({ extended: true }));
-http.createServer(app).listen(process.env.PORT || 3000);
+
 mongoAtlasUsername = process.env.ATLAS_USERNAME;
 mongoAtlasPassword = process.env.ATLAS_PASSWORD;
 
@@ -1253,7 +1250,7 @@ app
     if (req.body.updatebutton === "Update User") {
       
       memberModel.updateOne(
-        { username: req.body.username }, 
+        { username: req.body.username },
         {
           username: req.body.username,
           title: req.body.title,
