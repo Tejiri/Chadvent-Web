@@ -246,7 +246,7 @@ function addToStatement(
 app
   .route("/")
   .get(function (req, res) {
-    if (req.secure == true) {
+    if (req.secure == false) {
       res.render("login");
     } else {
       res.redirect("https://" + req.headers.host);
