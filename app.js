@@ -248,6 +248,7 @@ function addToStatement(
 app
   .route("/")
   .get(function (req, res) {
+    
     res.render("login");
   })
   .post(function (req, res) {
@@ -354,6 +355,7 @@ app
   })
   .post(function (req, res) {
     console.log(req.body);
+  
     userModel.register(
       { username: req.body.username },
       req.body.password,
@@ -1618,6 +1620,9 @@ app
 app.route("/json/accounts").get(function (req, res) {
   if (req.query.api_key == process.env.API_KEY) {
     accountModel.find(function (err, docs) {
+      if (err) {
+        res.send(err);
+      }
       res.send(docs);
     });
   } else {
