@@ -263,7 +263,7 @@
         role="tabpanel"
         aria-labelledby="pills-contact-tab"
       >
-        <%-include('editmember/memberaccountstatements.ejs') -%>
+        <%-include('editmember/adminaccountstatement.ejs') -%>
       </div>
     </div>
 
@@ -305,6 +305,8 @@
       $("#updateform").submit(function (e) {
         e.preventDefault();
         $.ajax({
+          //https://chadventmpcs.herokuapp.com/editmember
+          //http://localhost:3000/editmember?username=084
           url: "https://chadventmpcs.herokuapp.com/editmember",
           type: "POST",
           data: {
@@ -398,8 +400,8 @@
                   "Member has been credited with " + $("#creditamount").val()
                 );
                 setTimeout(function () {
-                    location.reload(true);
-                  }, 2000);
+                  location.reload(true);
+                }, 2000);
               }
             },
 
@@ -434,8 +436,8 @@
                   "Member has been debited with " + $("#debitamount").val()
                 );
                 setTimeout(function () {
-                    location.reload(true);
-                  }, 2000);
+                  location.reload(true);
+                }, 2000);
               }
             },
 
@@ -444,6 +446,161 @@
             },
           });
         }
+      });
+
+      document.querySelectorAll(".deletetransactionbutton").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          $("#deletetransaction").submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+              url: "https://chadventmpcs.herokuapp.com/editmember",
+              type: "POST",
+              data: {
+                updatebutton: event.target.value,
+              },
+              success: function (data) {
+                console.log(data);
+                if (data.ok == 1) {
+                  sweetSuccess(
+                    "Transaction has been deleted" + $("#debitamount").val()
+                  );
+                  setTimeout(function () {
+                    location.reload(true);
+                  }, 2000);
+                }
+              },
+
+              fail: function (xhr, textStatus, errorThrown) {
+                sweetFailure();
+              },
+            });
+          });
+        });
+      });
+
+      document.querySelectorAll(".deletetransactionbutton2").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          $("#deletetransaction2").submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+              url: "https://chadventmpcs.herokuapp.com/editmember",
+              type: "POST",
+              data: {
+                updatebutton: event.target.value,
+              },
+              success: function (data) {
+                console.log(data);
+                if (data.ok == 1) {
+                  sweetSuccess(
+                    "Transaction has been deleted" + $("#debitamount").val()
+                  );
+                  setTimeout(function () {
+                    location.reload(true);
+                  }, 2000);
+                }
+              },
+
+              fail: function (xhr, textStatus, errorThrown) {
+                sweetFailure();
+              },
+            });
+          });
+        });
+      });
+
+      document.querySelectorAll(".deletetransactionbutton3").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          $("#deletetransaction3").submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+              url: "https://chadventmpcs.herokuapp.com/editmember",
+              type: "POST",
+              data: {
+                updatebutton: event.target.value,
+              },
+              success: function (data) {
+                console.log(data);
+                if (data.ok == 1) {
+                  sweetSuccess(
+                    "Transaction has been deleted" + $("#debitamount").val()
+                  );
+                  setTimeout(function () {
+                    location.reload(true);
+                  }, 2000);
+                }
+              },
+
+              fail: function (xhr, textStatus, errorThrown) {
+                sweetFailure();
+              },
+            });
+          });
+        });
+      });
+
+      document.querySelectorAll(".deletetransactionbutton4").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          $("#deletetransaction4").submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+              url: "https://chadventmpcs.herokuapp.com/editmember",
+              type: "POST",
+              data: {
+                updatebutton: event.target.value,
+              },
+              success: function (data) {
+                console.log(data);
+                if (data.ok == 1) {
+                  sweetSuccess(
+                    "Transaction has been deleted" + $("#debitamount").val()
+                  );
+                  setTimeout(function () {
+                    location.reload(true);
+                  }, 2000);
+                }
+              },
+
+              fail: function (xhr, textStatus, errorThrown) {
+                sweetFailure();
+              },
+            });
+          });
+        });
+      });
+
+      document.querySelectorAll(".deletetransactionbutton5").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          $("#deletetransaction5").submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+              url: "https://chadventmpcs.herokuapp.com/editmember",
+              type: "POST",
+              data: {
+                updatebutton: event.target.value,
+              },
+              success: function (data) {
+                console.log(data);
+                if (data.ok == 1) {
+                  sweetSuccess(
+                    "Transaction has been deleted" + $("#debitamount").val()
+                  );
+                  setTimeout(function () {
+                    location.reload(true);
+                  }, 2000);
+                }
+              },
+
+              fail: function (xhr, textStatus, errorThrown) {
+                sweetFailure();
+              },
+            });
+          });
+        });
       });
 
       $(document).ready(function () {

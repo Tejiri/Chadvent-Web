@@ -1,0 +1,73 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <h2>Fine Account Statement</h2>
+        </div>
+    </div>
+
+</div>
+
+<form id="deletetransaction3" action="" method="post">
+<div class="container">
+    <table id="fineTable" class="display blueTable" style="width: 100%">
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>Date</th>
+            <th>Narration</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Fine Account Balance</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          <%fineKeys %>
+          <%let x = 1 %> <% for (const key in finestatement) { %>
+          <%if(finestatement[key].transactiontype == "credit"){%>
+          <tr>
+            <td><%=x%></td>
+            <td><%=finestatement[key].date%></td>
+            <td><%=finestatement[key].narration%></td>
+            <td>0</td>
+            <td>₦<%=finestatement[key].amount%></td>
+            <td>₦<%=finestatement[key].balance%></td>
+            <td>
+              <button
+                class="deletetransactionbutton3"
+                name="updatebutton"
+                value="<%-fineKeys[key]%> <%-username %>"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+    
+          <%}else{%>
+    
+          <tr>
+            <td><%=x%></td>
+            <td><%=finestatement[key].date%></td>
+            <td><%=finestatement[key].narration%></td>
+            <td>₦<%=finestatement[key].amount%></td>
+            <td>0</td>
+            <td>₦<%=finestatement[key].balance%></td>
+            <td>
+              <button
+                class="deletetransactionbutton3"
+                name="updatebutton"
+                value="<%-fineKeys[key]%> <%-username %>"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+    
+          <%}%> <%x++%> <%}%>
+        </tbody>
+      </table>
+</div>
+
+</form>

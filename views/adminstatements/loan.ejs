@@ -1,0 +1,73 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <h2>Loan Account Statement</h2>
+        </div>
+    </div>
+
+</div>
+
+
+<form id="deletetransaction4" action="" method="post">
+<div class="container">
+    <table id="loanTable" class="display blueTable" style="width: 100%">
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>Date</th>
+            <th>Narration</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Loan Account Balance</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          <%loanKeys %>
+          <%let x = 1 %> <% for (const key in loanstatement) { %>
+          <%if(loanstatement[key].transactiontype == "credit"){%>
+          <tr>
+            <td><%=x%></td>
+            <td><%=loanstatement[key].date%></td>
+            <td><%=loanstatement[key].narration%></td>
+            <td>0</td>
+            <td>₦<%=loanstatement[key].amount%></td>
+            <td>₦<%=loanstatement[key].balance%></td>
+            <td>
+              <button
+                class="deletetransactionbutton4"
+                name="updatebutton"
+                value="<%-loanKeys[key]%> <%-username %>"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+    
+          <%}else{%>
+    
+          <tr>
+            <td><%=x%></td>
+            <td><%=loanstatement[key].date%></td>
+            <td><%=loanstatement[key].narration%></td>
+            <td>₦<%=loanstatement[key].amount%></td>
+            <td>0</td>
+            <td>₦<%=loanstatement[key].balance%></td>
+            <td>
+              <button
+                class="deletetransactionbutton4"
+                name="updatebutton"
+                value="<%-loanKeys[key]%> <%-username %>"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+    
+          <%}%> <%x++%> <%}%>
+        </tbody>
+      </table>
+</div>
+</form>
