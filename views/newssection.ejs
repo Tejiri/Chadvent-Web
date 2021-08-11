@@ -149,7 +149,7 @@
           .querySelectorAll(".deletenews")
           [i].addEventListener("click", function () {
             $.ajax({
-              url: "http://localhost:3000/newssection",
+              url: "https://chadventmpcs.herokuapp.com/newssection",
               type: "POST",
               data: {
                 newsbutton: "Delete news",
@@ -166,7 +166,7 @@
       $("#newsform").submit(function (e) {
         e.preventDefault();
         $.ajax({
-          url: "http://localhost:3000/newssection",
+          url: "https://chadventmpcs.herokuapp.com/newssection",
           type: "POST",
           data: {
             title: $("#title").val(),

@@ -310,7 +310,7 @@
         $.ajax({
           //https://chadventmpcs.herokuapp.com/editmember
           //http://localhost:3000/editmember?username=084
-          url: "http://localhost:3000/editmember",
+          url: "https://chadventmpcs.herokuapp.com/editmember",
           type: "POST",
           data: {
             username: $("#username").val(),
@@ -355,7 +355,7 @@
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "http://localhost:3000/editmember",
+              url: "https://chadventmpcs.herokuapp.com/editmember",
               type: "Delete",
               data: {
                 username: $("#username").val(),
@@ -365,7 +365,7 @@
                 if (data.message == "deleted successfully") {
                   Swal.fire("Member Deleted", "", "success");
 
-                  location.replace("http://localhost:3000/admin");
+                  location.replace("https://chadventmpcs.herokuapp.com/admin");
                 }
               },
 
@@ -385,7 +385,7 @@
           sweetFailure("Please select an account to be credited");
         } else {
           $.ajax({
-            url: "http://localhost:3000/editmember",
+            url: "https://chadventmpcs.herokuapp.com/editmember",
             type: "POST",
             data: {
               transactiontype: "credit",
@@ -421,7 +421,7 @@
           sweetFailure("Please select an account to be debited");
         } else {
           $.ajax({
-            url: "http://localhost:3000/editmember",
+            url: "https://chadventmpcs.herokuapp.com/editmember",
             type: "POST",
             data: {
               transactiontype: "debit",
@@ -457,7 +457,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "http://localhost:3000/editmember",
+              url: "https://chadventmpcs.herokuapp.com/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -488,7 +488,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "http://localhost:3000/editmember",
+              url: "https://chadventmpcs.herokuapp.com/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -519,7 +519,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "http://localhost:3000/editmember",
+              url: "https://chadventmpcs.herokuapp.com/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -550,7 +550,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "http://localhost:3000/editmember",
+              url: "https://chadventmpcs.herokuapp.com/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -581,7 +581,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "http://localhost:3000/editmember",
+              url: "https://chadventmpcs.herokuapp.com/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,

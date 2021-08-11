@@ -193,7 +193,7 @@
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "http://localhost:3000/profile",
+              url: "https://chadventmpcs.herokuapp.com/profile",
               method: "POST",
               data: {
                 adminusernametoreset:this.value,
