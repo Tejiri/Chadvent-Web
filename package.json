@@ -17,7 +17,8 @@
     "mongoose": "^5.11.17",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.1.0"
+    "passport-local-mongoose": "^6.1.0",
+    "sweetalert2-react": "^0.8.3"
   },
   "engines": {
     "node": "14.15.4"

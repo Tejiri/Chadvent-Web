@@ -141,7 +141,7 @@
     <script src="datatables/Buttons-1.6.5/js/buttons.html5.min.js"></script>
     <script src="datatables/Buttons-1.6.5/js/buttons.print.min.js"></script>
     <script src="bootstrap-5.0.0-beta2-dist/js/bootstrap.bundle.js"></script>
-jkjhkhk
+
     <script>
       $(document).ready(function () {
         $("#myTable").DataTable({
@@ -185,6 +185,7 @@ jkjhkhk
           .querySelectorAll(".resetpassword")
           [i].addEventListener("click", function () {
 
+            //https://chadventmpcs.herokuapp.com/
             Swal.fire({
           title: "Are you sure you want to reset this users password?",
           showCancelButton: true,
@@ -192,7 +193,7 @@ jkjhkhk
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/profile",
+              url: "http://localhost:3000/profile",
               method: "POST",
               data: {
                 adminusernametoreset:this.value,

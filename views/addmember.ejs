@@ -316,10 +316,12 @@
         });
       }
 
+
+      //https://chadventmpcs.herokuapp.com/addmember
       $("#addmemberform").submit(function (e) {
         e.preventDefault();
         $.ajax({
-          url: "https://chadventmpcs.herokuapp.com/addmember",
+          url: "http://localhost:3000/addmember",
           type: "POST",
           data: {
             username: $("#username").val(),

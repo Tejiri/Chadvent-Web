@@ -282,6 +282,9 @@
     <script src="datatables/Buttons-1.6.5/js/buttons.print.min.js"></script>
 
     <script>
+      var name =
+          "<%=title%> <%=firstname%> <%=lastname%> (<%=username%>)";
+        
       function sweetSuccess(message) {
         return Swal.fire({
           position: "center",
@@ -307,7 +310,7 @@
         $.ajax({
           //https://chadventmpcs.herokuapp.com/editmember
           //http://localhost:3000/editmember?username=084
-          url: "https://chadventmpcs.herokuapp.com/editmember",
+          url: "http://localhost:3000/editmember",
           type: "POST",
           data: {
             username: $("#username").val(),
@@ -352,7 +355,7 @@
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/editmember",
+              url: "http://localhost:3000/editmember",
               type: "Delete",
               data: {
                 username: $("#username").val(),
@@ -362,7 +365,7 @@
                 if (data.message == "deleted successfully") {
                   Swal.fire("Member Deleted", "", "success");
 
-                  location.replace("https://chadventmpcs.herokuapp.com/admin");
+                  location.replace("http://localhost:3000/admin");
                 }
               },
 
@@ -382,7 +385,7 @@
           sweetFailure("Please select an account to be credited");
         } else {
           $.ajax({
-            url: "https://chadventmpcs.herokuapp.com/editmember",
+            url: "http://localhost:3000/editmember",
             type: "POST",
             data: {
               transactiontype: "credit",
@@ -418,7 +421,7 @@
           sweetFailure("Please select an account to be debited");
         } else {
           $.ajax({
-            url: "https://chadventmpcs.herokuapp.com/editmember",
+            url: "http://localhost:3000/editmember",
             type: "POST",
             data: {
               transactiontype: "debit",
@@ -454,7 +457,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/editmember",
+              url: "http://localhost:3000/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -485,7 +488,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/editmember",
+              url: "http://localhost:3000/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -516,7 +519,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/editmember",
+              url: "http://localhost:3000/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -547,7 +550,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/editmember",
+              url: "http://localhost:3000/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -578,7 +581,7 @@
             e.preventDefault();
 
             $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/editmember",
+              url: "http://localhost:3000/editmember",
               type: "POST",
               data: {
                 updatebutton: event.target.value,
@@ -604,6 +607,7 @@
       });
 
       $(document).ready(function () {
+
         $("#loanTable").DataTable({
           info: false,
           responsive: true,
@@ -611,27 +615,27 @@
           buttons: [
             {
               extend: "copy",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "csv",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "excel",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "pdf",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "print",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
           ],
@@ -649,27 +653,27 @@
           buttons: [
             {
               extend: "copy",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "csv",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "excel",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "pdf",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "print",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
           ],
@@ -687,27 +691,27 @@
           buttons: [
             {
               extend: "copy",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "csv",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "excel",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "pdf",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "print",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
           ],
@@ -725,27 +729,27 @@
           buttons: [
             {
               extend: "copy",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "csv",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "excel",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "pdf",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "print",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
           ],
@@ -763,27 +767,27 @@
           buttons: [
             {
               extend: "copy",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "csv",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "excel",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "pdf",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
             {
               extend: "print",
-              messageTop: "guguiguguguiguigui",
+              messageTop: name,
               title: "My Account Statement",
             },
           ],
