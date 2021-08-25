@@ -105,6 +105,13 @@ const adminGet = function (req, res) {
         }
 
         accountModel.find(function (err, docs) {
+          var totalShareCapital = 0;
+          var totalThriftSavings = 0;
+          var totalSpecialDeposit = 0;
+          var totalCommodityTrading = 0;
+          var totalFine = 0;
+          var totalLoan = 0;
+          var totalProjectFinancing = 0;
           for (const key in docs) {
             var totalcontribution =
               parseFloat(docs[key].sharecapital) +
@@ -115,10 +122,35 @@ const adminGet = function (req, res) {
             num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             finalNumber = num_parts.join(".");
             contributionList.push(finalNumber);
+            totalShareCapital =
+              parseFloat(totalShareCapital) +
+              parseFloat(docs[key].sharecapital);
+            totalThriftSavings =
+              parseFloat(totalThriftSavings) +
+              parseFloat(docs[key].thriftsavings);
+            totalSpecialDeposit =
+              parseFloat(totalSpecialDeposit) +
+              parseFloat(docs[key].specialdeposit);
+            totalCommodityTrading =
+              parseFloat(totalCommodityTrading) +
+              parseFloat(docs[key].commoditytrading);
+            totalFine = parseFloat(totalFine) + parseFloat(docs[key].fine);
+            totalLoan = parseFloat(totalLoan) + parseFloat(docs[key].loan);
+            totalProjectFinancing =
+              parseFloat(totalProjectFinancing) +
+              parseFloat(docs[key].projectfinancing);
           }
+
           res.render("admin", {
             memberList: memberList,
             contributionList: contributionList,
+            totalShareCapital: addCommas(totalShareCapital),
+            totalThriftSavings: addCommas(totalThriftSavings),
+            totalSpecialDeposit: addCommas(totalSpecialDeposit),
+            totalCommodityTrading: addCommas(totalCommodityTrading),
+            totalFine: addCommas(totalFine),
+            totalLoan: addCommas(totalLoan),
+            totalProjectFinancing: addCommas(totalProjectFinancing),
           });
         });
       });

@@ -71,11 +71,96 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav>  
   <body style="width: 100%">
-    <div style="height: 50px"></div>
+    <h2 style="margin: 15px 0px 0px 40px">Member Account Summaries</h2>
 
-    <table id="myTable" class="display" style="width: 100%">
+    <div class="row" style="margin: 0px; padding: 0px">
+      <div
+        class="card text-white bg-dark col-lg-4"
+        style="margin: 20px auto; max-width: 16em"
+      >
+        <div class="card-header">Share Capital Total</div>
+        <div class="card-body">
+          <h5 class="card-title">₦<%=totalShareCapital %></h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+
+      <div
+        class="card text-white bg-dark col-lg-4"
+        style="margin: 20px auto; max-width: 16em"
+      >
+        <div class="card-header">Thrift Savings Total</div>
+        <div class="card-body">
+          <h5 class="card-title">₦<%=totalThriftSavings %></h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+
+      <div
+        class="card text-white bg-dark col-lg-4"
+        style="margin: 20px auto; max-width: 16em"
+      >
+        <div class="card-header">Special Deposit Total</div>
+        <div class="card-body">
+          <h5 class="card-title">₦<%=totalSpecialDeposit %></h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px; padding: 0px">
+      <div
+        class="card text-white bg-dark col-lg-4"
+        style="margin: 20px auto; max-width: 16em"
+      >
+        <div class="card-header">Commodity Trading Total</div>
+        <div class="card-body">
+          <h5 class="card-title">₦<%=totalCommodityTrading %></h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+
+      <div
+        class="card text-white bg-dark col-lg-4"
+        style="margin: 20px auto; max-width: 16em"
+      >
+        <div class="card-header">Fine Total</div>
+        <div class="card-body">
+          <h5 class="card-title">₦<%=totalFine %></h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+
+      <div
+        class="card text-white bg-dark col-lg-4"
+        style="margin: 20px auto; max-width: 16em"
+      >
+        <div class="card-header">Loan Total</div>
+        <div class="card-body">
+          <h5 class="card-title">₦<%=totalLoan %></h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px 0px 50px 0px; padding: 0px">
+      <div
+        class="card text-white bg-dark col-lg-4"
+        style="margin: 20px auto; max-width: 16em"
+      >
+        <div class="card-header">Project Financing Total</div>
+        <div class="card-body">
+          <h5 class="card-title">₦<%=totalProjectFinancing %></h5>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4"></div>
+    </div>
+
+    <table id="myTable" class="display" style="width: 100%;">
       <thead>
         <tr>
           <th>Username</th>
@@ -130,6 +215,10 @@
       </tbody>
     </table>
 
+    <div style=" margin-bottom: 50px;">
+
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="datatables/jquery.js"></script>
@@ -148,31 +237,31 @@
           // dom: "Bfrtip",
           // buttons: ["copy", "csv", "excel", "pdf", "print"],
           dom: "lfrtiBp",
-          buttons:{
+          buttons: {
             buttons: [
-            {
-              extend: "copy",
-              title: "Chadvent members list",
-              className: 'red'
-            },
-            {
-              extend: "csv",
-              title: "Chadvent members list",
-            },
-            {
-              extend: "excel",
-              title: "Chadvent members list",
-            },
-            {
-              extend: "pdf",
-              title: "Chadvent members list",
-            },
-            {
-              extend: "print",
-              title: "Chadvent members list",
-            },
-          ]
-          }
+              {
+                extend: "copy",
+                title: "Chadvent members list",
+                className: "red",
+              },
+              {
+                extend: "csv",
+                title: "Chadvent members list",
+              },
+              {
+                extend: "excel",
+                title: "Chadvent members list",
+              },
+              {
+                extend: "pdf",
+                title: "Chadvent members list",
+              },
+              {
+                extend: "print",
+                title: "Chadvent members list",
+              },
+            ],
+          },
         });
       });
 
@@ -184,40 +273,36 @@
         document
           .querySelectorAll(".resetpassword")
           [i].addEventListener("click", function () {
-
             //https://chadventmpcs.herokuapp.com/
             Swal.fire({
-          title: "Are you sure you want to reset this users password?",
-          showCancelButton: true,
-          confirmButtonText: `Reset`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            $.ajax({
-              url: "https://chadventmpcs.herokuapp.com/profile",
-              method: "POST",
-              data: {
-                adminusernametoreset:this.value,
-              },
-              success: function (data) {
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Password has been reset",
-                  showConfirmButton: false,
-                  timer: 3000,
+              title: "Are you sure you want to reset this users password?",
+              showCancelButton: true,
+              confirmButtonText: `Reset`,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                $.ajax({
+                  url: "https://chadventmpcs.herokuapp.com/profile",
+                  method: "POST",
+                  data: {
+                    adminusernametoreset: this.value,
+                  },
+                  success: function (data) {
+                    Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Password has been reset",
+                      showConfirmButton: false,
+                      timer: 3000,
+                    });
+                    // setTimeout(function () {
+                    //   location.replace("logout");
+                    // }, 3000);
+                  },
                 });
-                // setTimeout(function () {
-                //   location.replace("logout");
-                // }, 3000);
-              },
+              }
             });
-          }
-        });
-          
           });
       }
-
-     
     </script>
   </body>
 </html>
