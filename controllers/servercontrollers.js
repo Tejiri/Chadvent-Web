@@ -826,6 +826,247 @@ const profilePost = function (req, res) {
   }
 };
 
+const individualContributionGet = function (req, res) {
+  if (req.isAuthenticated()) {
+    if (req.user.username == process.env.ADMIN_USERNAME) {
+      var usernames = [];
+      var accountTotal = [];
+      var firstname = [];
+      var lastname = [];
+      var accounttype = req.query.account;
+
+      if (accounttype == "sharecapital") {
+        accountModel.find((err, docs) => {
+          for (const key in docs) {
+            usernames.push(docs[key].username);
+            accountTotal.push(addCommas(docs[key].sharecapital));
+
+            //     //   console.log(docs[key].username);
+            //     //  console.log(docs[key].sharecapital);
+          }
+
+          memberModel.find((err, docs) => {
+            for (const key in docs) {
+              // console.log(doc.firstname);
+              // console.log(doc.lastname);
+              firstname.push(docs[key].firstname);
+              // lastname.push(doc.lastname);
+              lastname.push(docs[key].lastname);
+
+              //     //   console.log(docs[key].username);
+              //     //  console.log(docs[key].sharecapital);
+            }
+
+            console.log(firstname);
+            res.render("accounttotal", {
+              user: usernames,
+              account: accountTotal,
+              first: firstname,
+              last: lastname,
+              accounttype: accounttype,
+            });
+          });
+        });
+      } else if (accounttype == "thriftsavings") {
+        accountModel.find((err, docs) => {
+          for (const key in docs) {
+            usernames.push(docs[key].username);
+            accountTotal.push(addCommas(docs[key].thriftsavings));
+
+            //     //   console.log(docs[key].username);
+            //     //  console.log(docs[key].sharecapital);
+          }
+
+          memberModel.find((err, docs) => {
+            for (const key in docs) {
+              // console.log(doc.firstname);
+              // console.log(doc.lastname);
+              firstname.push(docs[key].firstname);
+              // lastname.push(doc.lastname);
+              lastname.push(docs[key].lastname);
+
+              //     //   console.log(docs[key].username);
+              //     //  console.log(docs[key].sharecapital);
+            }
+
+            console.log(firstname);
+            res.render("accounttotal", {
+              user: usernames,
+              account: accountTotal,
+              first: firstname,
+              last: lastname,
+              accounttype: accounttype,
+            });
+          });
+        });
+      } else if (accounttype == "specialdeposit") {
+        accountModel.find((err, docs) => {
+          for (const key in docs) {
+            usernames.push(docs[key].username);
+            accountTotal.push(addCommas(docs[key].specialdeposit));
+
+            //     //   console.log(docs[key].username);
+            //     //  console.log(docs[key].sharecapital);
+          }
+
+          memberModel.find((err, docs) => {
+            for (const key in docs) {
+              // console.log(doc.firstname);
+              // console.log(doc.lastname);
+              firstname.push(docs[key].firstname);
+              // lastname.push(doc.lastname);
+              lastname.push(docs[key].lastname);
+
+              //     //   console.log(docs[key].username);
+              //     //  console.log(docs[key].sharecapital);
+            }
+
+            console.log(firstname);
+            res.render("accounttotal", {
+              user: usernames,
+              account: accountTotal,
+              first: firstname,
+              last: lastname,
+              accounttype: accounttype,
+            });
+          });
+        });
+      } else if (accounttype == "commoditytrading") {
+        accountModel.find((err, docs) => {
+          for (const key in docs) {
+            usernames.push(docs[key].username);
+            accountTotal.push(addCommas(docs[key].commoditytrading));
+
+            //     //   console.log(docs[key].username);
+            //     //  console.log(docs[key].sharecapital);
+          }
+
+          memberModel.find((err, docs) => {
+            for (const key in docs) {
+              // console.log(doc.firstname);
+              // console.log(doc.lastname);
+              firstname.push(docs[key].firstname);
+              // lastname.push(doc.lastname);
+              lastname.push(docs[key].lastname);
+
+              //     //   console.log(docs[key].username);
+              //     //  console.log(docs[key].sharecapital);
+            }
+
+            console.log(firstname);
+            res.render("accounttotal", {
+              user: usernames,
+              account: accountTotal,
+              first: firstname,
+              last: lastname,
+              accounttype: accounttype,
+            });
+          });
+        });
+      } else if (accounttype == "fine") {
+        accountModel.find((err, docs) => {
+          for (const key in docs) {
+            usernames.push(docs[key].username);
+            accountTotal.push(addCommas(docs[key].fine));
+
+            //     //   console.log(docs[key].username);
+            //     //  console.log(docs[key].sharecapital);
+          }
+
+          memberModel.find((err, docs) => {
+            for (const key in docs) {
+              // console.log(doc.firstname);
+              // console.log(doc.lastname);
+              firstname.push(docs[key].firstname);
+              // lastname.push(doc.lastname);
+              lastname.push(docs[key].lastname);
+
+              //     //   console.log(docs[key].username);
+              //     //  console.log(docs[key].sharecapital);
+            }
+
+            console.log(firstname);
+            res.render("accounttotal", {
+              user: usernames,
+              account: accountTotal,
+              first: firstname,
+              last: lastname,
+              accounttype: accounttype,
+            });
+          });
+        });
+      } else if (accounttype == "loan") {
+        accountModel.find((err, docs) => {
+          for (const key in docs) {
+            usernames.push(docs[key].username);
+            accountTotal.push(addCommas(docs[key].loan));
+
+            //     //   console.log(docs[key].username);
+            //     //  console.log(docs[key].sharecapital);
+          }
+
+          memberModel.find((err, docs) => {
+            for (const key in docs) {
+              // console.log(doc.firstname);
+              // console.log(doc.lastname);
+              firstname.push(docs[key].firstname);
+              // lastname.push(doc.lastname);
+              lastname.push(docs[key].lastname);
+
+              //     //   console.log(docs[key].username);
+              //     //  console.log(docs[key].sharecapital);
+            }
+
+            console.log(firstname);
+            res.render("accounttotal", {
+              user: usernames,
+              account: accountTotal,
+              first: firstname,
+              last: lastname,
+              accounttype: accounttype,
+            });
+          });
+        });
+      } else if (accounttype == "projectfinancing") {
+        accountModel.find((err, docs) => {
+          for (const key in docs) {
+            usernames.push(docs[key].username);
+            accountTotal.push(addCommas(docs[key].projectfinancing));
+
+            //     //   console.log(docs[key].username);
+            //     //  console.log(docs[key].sharecapital);
+          }
+
+          memberModel.find((err, docs) => {
+            for (const key in docs) {
+              // console.log(doc.firstname);
+              // console.log(doc.lastname);
+              firstname.push(docs[key].firstname);
+              // lastname.push(doc.lastname);
+              lastname.push(docs[key].lastname);
+
+              //     //   console.log(docs[key].username);
+              //     //  console.log(docs[key].sharecapital);
+            }
+
+            console.log(firstname);
+            res.render("accounttotal", {
+              user: usernames,
+              account: accountTotal,
+              first: firstname,
+              last: lastname,
+              accounttype: accounttype,
+            });
+          });
+        });
+      }
+    } else {
+    }
+  } else {
+    res.redirect("/");
+  }
+};
+
 module.exports = {
   homeGet: homeGet,
   homePost: homePost,
@@ -845,4 +1086,5 @@ module.exports = {
   statementsGet: statementsGet,
   profileGet: profileGet,
   profilePost: profilePost,
+  individualContributionGet: individualContributionGet,
 };

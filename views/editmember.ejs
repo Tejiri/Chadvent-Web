@@ -282,9 +282,8 @@
     <script src="datatables/Buttons-1.6.5/js/buttons.print.min.js"></script>
 
     <script>
-      var name =
-          "<%=title%> <%=firstname%> <%=lastname%> (<%=username%>)";
-        
+      var name = "<%=title%> <%=firstname%> <%=lastname%> (<%=username%>)";
+
       function sweetSuccess(message) {
         return Swal.fire({
           position: "center",
@@ -464,14 +463,17 @@
               },
               success: function (data) {
                 console.log(data);
-                if (data.ok == 1) {
-                  sweetSuccess(
-                    "Transaction has been deleted" + $("#debitamount").val()
-                  );
-                  setTimeout(function () {
-                    location.reload(true);
-                  }, 2000);
-                }
+                var d = JSON.stringify(data);
+                console.log(d);
+                location.replace("edittransaction?valid=" + d);
+                // if (data.ok == 1) {
+                //   sweetSuccess(
+                //     "Transaction has been deleted" + $("#debitamount").val()
+                //   );
+                //   setTimeout(function () {
+                //     location.reload(true);
+                //   }, 2000);
+                // }
               },
 
               fail: function (xhr, textStatus, errorThrown) {
@@ -606,8 +608,40 @@
         });
       });
 
-      $(document).ready(function () {
+      document
+        .querySelectorAll(".updateindividualtransaction")
+        .forEach((item) => {
+          item.addEventListener("click", (event) => {
+            $("#deletetransaction").submit(function (e) {
+              e.preventDefault();
 
+              $.ajax({
+                url: "https://chadventmpcs.herokuapp.com/editmember",
+                type: "POST",
+                data: {
+                  updatebutton: event.target.value,
+                },
+                success: function (data) {
+                  console.log(data);
+                  if (data.ok == 1) {
+                    sweetSuccess(
+                      "Transaction has been deleted" + $("#debitamount").val()
+                    );
+                    setTimeout(function () {
+                      location.reload(true);
+                    }, 2000);
+                  }
+                },
+
+                fail: function (xhr, textStatus, errorThrown) {
+                  sweetFailure();
+                },
+              });
+            });
+          });
+        });
+
+      $(document).ready(function () {
         $("#loanTable").DataTable({
           info: false,
           responsive: true,

@@ -823,7 +823,7 @@ const editMemberPost = function (req, res) {
   } else {
     var button = req.body.updatebutton;
     var list = button.split(" ");
-    console.log(list);
+    //console.log(list);
     accountModel.findOne({ username: list[1] }, function (err, docs) {
       if (err) {
         res.send(err);
@@ -837,424 +837,428 @@ const editMemberPost = function (req, res) {
             amount: docs.transactions[key].amount,
             narration: docs.transactions[key].narration,
             date: docs.transactions[key].date,
+            user: list[1],
           };
-          if (tran.transactiontype == "credit") {
-            var account = tran.account;
-            var amount = tran.amount;
-            switch (account) {
-              case "sharecapital":
-                var finalValue =
-                  parseFloat(docs.sharecapital) - parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { sharecapital: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                          } else {
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              case "thriftsavings":
-                var finalValue =
-                  parseFloat(docs.thriftsavings) - parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { thriftsavings: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                          } else {
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              case "specialdeposit":
-                var finalValue =
-                  parseFloat(docs.specialdeposit) - parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { specialdeposit: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                          } else {
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              case "commoditytrading":
-                var finalValue =
-                  parseFloat(docs.commoditytrading) - parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { commoditytrading: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                          } else {
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              case "fine":
-                var finalValue = parseFloat(docs.fine) - parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { fine: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                          } else {
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              case "loan":
-                var finalValue = parseFloat(docs.loan) - parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { loan: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                          } else {
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              case "projectfinancing":
-                var finalValue =
-                  parseFloat(docs.projectfinancing) - parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { projectfinancing: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                          } else {
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              default:
-                break;
-            }
-          } else {
-            var account = tran.account;
-            var amount = tran.amount;
-            var amountList = amount.split("-");
-            amount = amountList[1];
-            switch (account) {
-              case "sharecapital":
-                var finalValue =
-                  parseFloat(docs.sharecapital) + parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { sharecapital: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                            console.log(err);
-                          } else {
-                            console.log(doc.transactions);
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              case "thriftsavings":
-                var finalValue =
-                  parseFloat(docs.thriftsavings) + parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { thriftsavings: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                            console.log(err);
-                          } else {
-                            console.log(doc.transactions);
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
+          res.json(tran);
+          // res.redirect("edittransaction");
+          // console.log(tran);
+          // if (tran.transactiontype == "credit") {
+          //   var account = tran.account;
+          //   var amount = tran.amount;
+          //   switch (account) {
+          //     case "sharecapital":
+          //       var finalValue =
+          //         parseFloat(docs.sharecapital) - parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { sharecapital: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                 } else {
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     case "thriftsavings":
+          //       var finalValue =
+          //         parseFloat(docs.thriftsavings) - parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { thriftsavings: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                 } else {
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     case "specialdeposit":
+          //       var finalValue =
+          //         parseFloat(docs.specialdeposit) - parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { specialdeposit: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                 } else {
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     case "commoditytrading":
+          //       var finalValue =
+          //         parseFloat(docs.commoditytrading) - parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { commoditytrading: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                 } else {
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     case "fine":
+          //       var finalValue = parseFloat(docs.fine) - parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { fine: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                 } else {
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     case "loan":
+          //       var finalValue = parseFloat(docs.loan) - parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { loan: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                 } else {
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     case "projectfinancing":
+          //       var finalValue =
+          //         parseFloat(docs.projectfinancing) - parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { projectfinancing: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                 } else {
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     default:
+          //       break;
+          //   }
+          // } else {
+          //   var account = tran.account;
+          //   var amount = tran.amount;
+          //   var amountList = amount.split("-");
+          //   amount = amountList[1];
+          //   switch (account) {
+          //     case "sharecapital":
+          //       var finalValue =
+          //         parseFloat(docs.sharecapital) + parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { sharecapital: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //             console.log(err);
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                   console.log(err);
+          //                 } else {
+          //                   console.log(doc.transactions);
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     case "thriftsavings":
+          //       var finalValue =
+          //         parseFloat(docs.thriftsavings) + parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { thriftsavings: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //             console.log(err);
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                   console.log(err);
+          //                 } else {
+          //                   console.log(doc.transactions);
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
 
-                break;
-              case "specialdeposit":
-                var finalValue =
-                  parseFloat(docs.specialdeposit) + parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { specialdeposit: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                            console.log(err);
-                          } else {
-                            console.log(doc.transactions);
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
+          //       break;
+          //     case "specialdeposit":
+          //       var finalValue =
+          //         parseFloat(docs.specialdeposit) + parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { specialdeposit: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //             console.log(err);
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                   console.log(err);
+          //                 } else {
+          //                   console.log(doc.transactions);
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
 
-              case "commoditytrading":
-                var finalValue =
-                  parseFloat(docs.commoditytrading) + parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { commoditytrading: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                            console.log(err);
-                          } else {
-                            console.log(doc.transactions);
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
+          //     case "commoditytrading":
+          //       var finalValue =
+          //         parseFloat(docs.commoditytrading) + parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { commoditytrading: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //             console.log(err);
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                   console.log(err);
+          //                 } else {
+          //                   console.log(doc.transactions);
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
 
-              case "fine":
-                var finalValue = parseFloat(docs.fine) + parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { fine: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                            console.log(err);
-                          } else {
-                            console.log(doc.transactions);
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
+          //     case "fine":
+          //       var finalValue = parseFloat(docs.fine) + parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { fine: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //             console.log(err);
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                   console.log(err);
+          //                 } else {
+          //                   console.log(doc.transactions);
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
 
-              case "loan":
-                var finalValue = parseFloat(docs.loan) + parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { loan: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                            console.log(err);
-                          } else {
-                            console.log(doc.transactions);
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
+          //     case "loan":
+          //       var finalValue = parseFloat(docs.loan) + parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { loan: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //             console.log(err);
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                   console.log(err);
+          //                 } else {
+          //                   console.log(doc.transactions);
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
 
-              case "projectfinancing":
-                var finalValue =
-                  parseFloat(docs.projectfinancing) + parseFloat(amount);
-                accountModel.findOneAndUpdate(
-                  { username: list[1] },
-                  { projectfinancing: finalValue.toFixed(2) },
-                  function (err, doc) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      accountModel.findOneAndUpdate(
-                        { username: list[1] },
-                        { $pull: { transactions: { _id: tran._id } } },
-                        { safe: true, upsert: true },
-                        function (err, doc) {
-                          if (err) {
-                            console.log(err);
-                          } else {
-                            console.log(doc.transactions);
-                            var data = {
-                              ok: 1,
-                            };
-                            res.json(data);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-                break;
-              default:
-                break;
-            }
-          }
+          //     case "projectfinancing":
+          //       var finalValue =
+          //         parseFloat(docs.projectfinancing) + parseFloat(amount);
+          //       accountModel.findOneAndUpdate(
+          //         { username: list[1] },
+          //         { projectfinancing: finalValue.toFixed(2) },
+          //         function (err, doc) {
+          //           if (err) {
+          //             console.log(err);
+          //           } else {
+          //             accountModel.findOneAndUpdate(
+          //               { username: list[1] },
+          //               { $pull: { transactions: { _id: tran._id } } },
+          //               { safe: true, upsert: true },
+          //               function (err, doc) {
+          //                 if (err) {
+          //                   console.log(err);
+          //                 } else {
+          //                   console.log(doc.transactions);
+          //                   var data = {
+          //                     ok: 1,
+          //                   };
+          //                   res.json(data);
+          //                 }
+          //               }
+          //             );
+          //           }
+          //         }
+          //       );
+          //       break;
+          //     default:
+          //       break;
+          //   }
+          // }
           //  console.log(docs);
           //  console.log(tran.amount);
         }

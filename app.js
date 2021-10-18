@@ -19,12 +19,15 @@ const addmemberrouter = require("./routers/addmemberroutes");
 const newssectionrouter = require("./routers/newssectionroutes");
 const statementsrouter = require("./routers/statementsroutes");
 const profilerouter = require("./routers/profileroutes");
+const individualContributionrouter = require("./routers/individualcontributionroutes");
+// const edittransactionrouter = require("./routers/edittransactionroutes");
 
 const app = express();
 
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -64,6 +67,36 @@ app.use("/addmember", addmemberrouter);
 app.use("/newssection", newssectionrouter);
 app.use("/statements", statementsrouter);
 app.use("/profile", profilerouter);
+app.use("/admin/accounttotal", individualContributionrouter);
+
+app
+  .get("/edittransaction", (req, res) => {
+    trans = req.query.valid;
+    var tran = JSON.parse(trans);
+    //   console.log(req.query);
+    //   console.log(req.query.valid);
+    //  var name = JSON.stringify(tran);
+    //  console.log(name);
+    res.render("edittransaction", {
+      id: tran._id,
+      transactiontype: tran.transactiontype,
+      account: tran.account,
+      amount: tran.amount,
+      narration: tran.narration,
+      date: tran.date,
+      user: tran.user,
+    });
+  })
+  .post("/edittransaction", (req, res) => {
+    accountModel.find((err, docs) => {
+      console.log(docs);
+    });
+    // accountModel.findOne({_id:req.body.id},(err,doc)=>{
+    //   console.log(doc);
+    // })
+    // console.log(req.body);
+  });
+// app.use("/edittransaction",edittransactionrouter)
 
 // contributionList = ["fdsdfds", "dffdsfsd"];
 // transaction = {};

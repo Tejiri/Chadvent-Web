@@ -1,0 +1,142 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="bootstrap-5.0.0-beta2-dist/css/bootstrap.css"
+  />
+  </head>
+  <body>
+    <!-- tran = req.query.valid;
+  res.render("edittransaction", {
+    id: tran._id,
+    transactiontype: tran.transactiontype,
+    account: tran.account,
+    amount: tran.amount,
+    narration: tran.narration,
+    date: tran.date,
+  }); -->
+
+  <div style="padding: 10px;">
+    <h2>Modify Transaction for <%=user %></h2>
+    <h5>Transaction ID: <%=id %></h5>
+    <h5>Transaction type: <%=transactiontype %></h5>
+    <h5>Account: <%=account %></h5>
+    <h5>Amount: <%=amount %></h5>
+    <h5>Narration: <%=narration %></h5>
+    <h5>Date: <%=date %></h4>
+  </div>
+   
+
+    <hr />
+
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        flex-wrap: wrap;
+      "
+    >
+      <div style="padding: 10px">
+        <label for="ID">ID</label>
+        <input type="text" name="id" value="<%=id %>" disabled id="id"/>
+      </div>
+      <div style="padding: 10px">
+        <label for="ID">Transaction type</label>
+        <!-- <input type="text" id="transactiontype" name="transactiontype" value="<%=transactiontype %>" /> -->
+        <select
+      id="transactiontype"
+        >
+          <option selected value="<%=transactiontype %>"><%=transactiontype %></option>
+          <% if(transactiontype == 'credit') {%>
+          <option value="debit">debit</option>
+          <%} else{%>
+            <option value="credit">credit</option>
+          
+            <%}%>
+        </select>
+      </div>
+      <div style="padding: 10px">
+        <label for="ID">Account</label>
+        <input type="text" id="account" name="account" value="<%=account %>" disabled/>
+      </div>
+      
+
+     
+    
+    
+      
+    </div>
+
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 20px 20px 20px;
+        flex-wrap: wrap;
+      "
+    >
+      <div style="padding: 10px">
+        <label for="ID">Amount</label>
+        <input type="text" id="amount" name="amount" value="<%=amount %>" />
+      </div>
+
+      <div style="padding: 10px">
+        <label for="ID">Narration</label>
+        <input type="text" id="narration" name="narration" value="<%=narration %>" />
+      </div>
+      <div style="padding: 10px">
+        <label for="ID">Date</label>
+        <input type="date" id="date" name="date" value="<%=date %>" />
+      </div>
+    </div>
+
+    <div>
+      <button id="updatetransaction">Update</button>
+      <button>Delete</button>
+      <button>Cancel</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="bootstrap-5.0.0-beta2-dist/js/bootstrap.bundle.js"></script>
+
+    <script>
+ $("#updatetransaction").click(function (e) {
+       
+         
+            $.ajax({
+              url: "https://chadventmpcs.herokuapp.com/edittransaction",
+              type: "POST",
+              data: {
+                name: "suhfuhfdsuihdsifhdifdshoiusdigdugsdo",
+                id: $('#id').val(),
+                transactiontype: $('#transactiontype').val(),
+                 account: $('#account').val(),
+                amount: $('#amount').val(),
+                narration: $('#narration').val(),
+                date: $('#date').val(),
+              },
+              success: function (data) {
+                console.log(data);
+                // if (data.message == "deleted successfully") {
+                //   Swal.fire("Member Deleted", "", "success");
+
+                //   location.replace("http://localhost:3000/admin");
+                // }
+              },
+
+              fail: function (xhr, textStatus, errorThrown) {
+                console.log("Error");
+              },
+            });
+          
+        
+      });
+    </script>
+  </body>
+</html>

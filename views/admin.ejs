@@ -76,37 +76,46 @@
     <h2 style="margin: 15px 0px 0px 40px">Member Account Summaries</h2>
 
     <div class="row" style="margin: 0px; padding: 0px">
+     
       <div
         class="card text-white bg-dark col-lg-4"
         style="margin: 20px auto; max-width: 16em"
       >
+      <a href="https://chadventmpcs.herokuapp.com/admin/accounttotal?account=sharecapital" target="_blank" style="color: white; text-decoration: none;">
         <div class="card-header">Share Capital Total</div>
         <div class="card-body">
           <h5 class="card-title">₦<%=totalShareCapital %></h5>
           <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
+      </a>
       </div>
+
+
 
       <div
         class="card text-white bg-dark col-lg-4"
         style="margin: 20px auto; max-width: 16em"
       >
+      <a href="https://chadventmpcs.herokuapp.com/admin/accounttotal?account=thriftsavings" target="_blank" style="color: white; text-decoration: none;">
         <div class="card-header">Thrift Savings Total</div>
         <div class="card-body">
           <h5 class="card-title">₦<%=totalThriftSavings %></h5>
           <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
+        </a>
       </div>
 
       <div
         class="card text-white bg-dark col-lg-4"
         style="margin: 20px auto; max-width: 16em"
       >
+       <a href="https://chadventmpcs.herokuapp.com/admin/accounttotal?account=specialdeposit" target="_blank" style="color: white; text-decoration: none;">
         <div class="card-header">Special Deposit Total</div>
         <div class="card-body">
           <h5 class="card-title">₦<%=totalSpecialDeposit %></h5>
           <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
+        </a>
       </div>
     </div>
 
@@ -115,33 +124,39 @@
         class="card text-white bg-dark col-lg-4"
         style="margin: 20px auto; max-width: 16em"
       >
+      <a href="https://chadventmpcs.herokuapp.com/admin/accounttotal?account=commoditytrading" target="_blank" style="color: white; text-decoration: none;">
         <div class="card-header">Commodity Trading Total</div>
         <div class="card-body">
           <h5 class="card-title">₦<%=totalCommodityTrading %></h5>
           <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
+        </a>
       </div>
 
       <div
         class="card text-white bg-dark col-lg-4"
         style="margin: 20px auto; max-width: 16em"
       >
+      <a href="https://chadventmpcs.herokuapp.com/admin/accounttotal?account=fine" target="_blank" style="color: white; text-decoration: none;">
         <div class="card-header">Fine Total</div>
         <div class="card-body">
           <h5 class="card-title">₦<%=totalFine %></h5>
           <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
+        </a>
       </div>
 
       <div
         class="card text-white bg-dark col-lg-4"
         style="margin: 20px auto; max-width: 16em"
       >
+      <a href="https://chadventmpcs.herokuapp.com/admin/accounttotal?account=loan" target="_blank" style="color: white; text-decoration: none;">
         <div class="card-header">Loan Total</div>
         <div class="card-body">
           <h5 class="card-title">₦<%=totalLoan %></h5>
           <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
+        </a>
       </div>
     </div>
 
@@ -150,11 +165,13 @@
         class="card text-white bg-dark col-lg-4"
         style="margin: 20px auto; max-width: 16em"
       >
+      <a href="https://chadventmpcs.herokuapp.com/admin/accounttotal?account=projectfinancing" target="_blank" style="color: white; text-decoration: none;">
         <div class="card-header">Project Financing Total</div>
         <div class="card-body">
           <h5 class="card-title">₦<%=totalProjectFinancing %></h5>
           <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
+        </a>
       </div>
       <div class="col-lg-4"></div>
       <div class="col-lg-4"></div>
@@ -181,7 +198,7 @@
           <td><%=memberList[i].firstname %></td>
           <td><%=memberList[i].lastname %></td>
           <td><%=memberList[i].middlename %></td>
-          <td>₦<%=contributionList[i] %></td>
+          <td><%=contributionList[i] %></td>
           <td>
             <form
               action=""

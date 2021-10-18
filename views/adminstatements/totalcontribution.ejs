@@ -23,7 +23,8 @@
           <th>Thrift Savings</th>
           <th>Special Deposit</th>
           <th>Total Contribution Account Balance</th>
-          <th>Delete</th>
+          <!-- <th>Delete</th>
+          <th>Update</th> -->
         </tr>
       </thead>
 
@@ -36,10 +37,43 @@
           <td><%=totalcontributionstatement[key].date%></td>
           <td><%=totalcontributionstatement[key].narration%></td>
           <td>0</td>
-          <td>₦<%=totalcontributionstatement[key].amount%></td>
-          <td>₦<%=totalcontributionstatement[key].sharecapital%></td>
-          <td>₦<%=totalcontributionstatement[key].thriftsavings%></td>
-          <td>₦<%=totalcontributionstatement[key].specialdeposit%></td>
+          <td><%=totalcontributionstatement[key].amount%></td>
+          <td><%=totalcontributionstatement[key].sharecapital%></td>
+          <td><%=totalcontributionstatement[key].thriftsavings%></td>
+          <td><%=totalcontributionstatement[key].specialdeposit%></td>
+          <td><%=totalcontributionstatement[key].balance%></td>
+          <!-- <td>
+            <button
+              class="deletetransactionbutton"
+              name="updatebutton"
+              value="<%-totalContributionkeys[key]%> <%-username %>"
+            >
+            
+              Delete
+            </button>
+          </td>
+          <td>
+            <button
+              class="updatetransactionbutton"
+              name="updateindividualtransaction"
+              value="<%-totalContributionkeys[key]%> <%-username %>"
+            >
+              Update
+            </button>
+          </td> -->
+        </tr>
+
+        <%}else{%>
+
+        <tr>
+          <td><%=x%></td>
+          <td><%=totalcontributionstatement[key].date%></td>
+          <td><%=totalcontributionstatement[key].narration%></td>
+          <td><%=totalcontributionstatement[key].amount%></td>
+          <td>0</td>
+          <td><%=totalcontributionstatement[key].sharecapital%></td>
+          <td><%=totalcontributionstatement[key].thriftsavings%></td>
+          <td><%=totalcontributionstatement[key].specialdeposit%></td>
           <td><%=totalcontributionstatement[key].balance%></td>
           <td>
             <button
@@ -50,27 +84,13 @@
               Delete
             </button>
           </td>
-        </tr>
-
-        <%}else{%>
-
-        <tr>
-          <td><%=x%></td>
-          <td><%=totalcontributionstatement[key].date%></td>
-          <td><%=totalcontributionstatement[key].narration%></td>
-          <td>₦<%=totalcontributionstatement[key].amount%></td>
-          <td>0</td>
-          <td>₦<%=totalcontributionstatement[key].sharecapital%></td>
-          <td>₦<%=totalcontributionstatement[key].thriftsavings%></td>
-          <td>₦<%=totalcontributionstatement[key].specialdeposit%></td>
-          <td><%=totalcontributionstatement[key].balance%></td>
           <td>
             <button
-              class="deletetransactionbutton"
-              name="updatebutton"
+              class="updatetransactionbutton"
+              name="updateindividualtransaction"
               value="<%-totalContributionkeys[key]%> <%-username %>"
             >
-              Delete
+              Update
             </button>
           </td>
         </tr>
