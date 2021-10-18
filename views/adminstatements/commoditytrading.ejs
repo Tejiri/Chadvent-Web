@@ -24,7 +24,7 @@
           <th>Debit</th>
           <th>Credit</th>
           <th>Commodity Trading Account Balance</th>
-          <th>Delete</th>
+          <!-- <th>Delete</th> -->
         </tr>
       </thead>
   
@@ -39,7 +39,7 @@
           <td>0</td>
           <td><%=commoditytradingstatement[key].amount%></td>
           <td><%=commoditytradingstatement[key].balance%></td>
-          <td>
+          <!-- <td>
             <button
               class="deletetransactionbutton2"
               name="updatebutton"
@@ -47,7 +47,7 @@
             >
               Delete
             </button>
-          </td>
+          </td> -->
         </tr>
   
         <%}else{%>
@@ -59,7 +59,7 @@
           <td><%=commoditytradingstatement[key].amount%></td>
           <td>0</td>
           <td><%=commoditytradingstatement[key].balance%></td>
-          <td>
+          <!-- <td>
             <button
               class="deletetransactionbutton2"
               name="updatebutton"
@@ -67,7 +67,7 @@
             >
               Delete
             </button>
-          </td>
+          </td> -->
         </tr>
   
         <%}%> <%x++%> <%}%>

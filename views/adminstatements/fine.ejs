@@ -19,7 +19,7 @@
             <th>Debit</th>
             <th>Credit</th>
             <th>Fine Account Balance</th>
-            <th>Delete</th>
+            <!-- <th>Delete</th> -->
           </tr>
         </thead>
     
@@ -34,7 +34,7 @@
             <td>0</td>
             <td><%=finestatement[key].amount%></td>
             <td><%=finestatement[key].balance%></td>
-            <td>
+            <!-- <td>
               <button
                 class="deletetransactionbutton3"
                 name="updatebutton"
@@ -42,7 +42,7 @@
               >
                 Delete
               </button>
-            </td>
+            </td> -->
           </tr>
     
           <%}else{%>
@@ -54,7 +54,7 @@
             <td><%=finestatement[key].amount%></td>
             <td>0</td>
             <td><%=finestatement[key].balance%></td>
-            <td>
+            <!-- <td>
               <button
                 class="deletetransactionbutton3"
                 name="updatebutton"
@@ -62,7 +62,7 @@
               >
                 Delete
               </button>
-            </td>
+            </td> -->
           </tr>
     
           <%}%> <%x++%> <%}%>

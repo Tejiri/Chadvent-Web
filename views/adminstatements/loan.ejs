@@ -20,7 +20,7 @@
             <th>Debit</th>
             <th>Credit</th>
             <th>Loan Account Balance</th>
-            <th>Delete</th>
+            <!-- <th>Delete</th> -->
           </tr>
         </thead>
     
@@ -35,7 +35,7 @@
             <td>0</td>
             <td><%=loanstatement[key].amount%></td>
             <td><%=loanstatement[key].balance%></td>
-            <td>
+            <!-- <td>
               <button
                 class="deletetransactionbutton4"
                 name="updatebutton"
@@ -43,7 +43,7 @@
               >
                 Delete
               </button>
-            </td>
+            </td> -->
           </tr>
     
           <%}else{%>
@@ -55,7 +55,7 @@
             <td><%=loanstatement[key].amount%></td>
             <td>0</td>
             <td><%=loanstatement[key].balance%></td>
-            <td>
+            <!-- <td>
               <button
                 class="deletetransactionbutton4"
                 name="updatebutton"
@@ -63,7 +63,7 @@
               >
                 Delete
               </button>
-            </td>
+            </td> -->
           </tr>
     
           <%}%> <%x++%> <%}%>
