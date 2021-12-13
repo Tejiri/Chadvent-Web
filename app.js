@@ -114,10 +114,6 @@ function updateUserAccount2(body) {
     );
     query[body.account] = currentCalculation;
 
-    // console.log(query);
-    // console.log(accountValue);
-    //console.log(accountValue.account);
-
     accountModel.updateOne(
       { username: body.user },
       { $set: query },
@@ -173,7 +169,6 @@ function updateUserAccount(body, previousDetails, doc) {
 
   query[previousDetails.account] = previousCalculation;
 
-  console.log(query);
   accountModel
     .updateOne({ username: body.user }, { $set: query }, (err, doc) => {
       if (err) {
@@ -224,7 +219,7 @@ app
     }
   })
   .post("/edittransaction", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
 
     if (req.body.actiontoperform == "update") {
       accountModel.findOne({ username: req.body.user }, (err, doc) => {

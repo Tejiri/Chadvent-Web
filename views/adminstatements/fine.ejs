@@ -8,7 +8,7 @@
 
 </div>
 
-<form id="deletetransaction3" action="" method="post">
+<form action="" method="post">
 <div class="container">
     <table id="fineTable" class="display blueTable" style="width: 100%">
         <thead>
@@ -19,7 +19,7 @@
             <th>Debit</th>
             <th>Credit</th>
             <th>Fine Account Balance</th>
-            <!-- <th>Update</th> -->
+            <th>Update</th>
           </tr>
         </thead>
     
@@ -34,15 +34,14 @@
             <td>0</td>
             <td><%=finestatement[key].amount%></td>
             <td><%=finestatement[key].balance%></td>
-            <!-- <td>
+            <td>
               <button
-                class="deletetransactionbutton3"
                 name="updatebutton"
                 value="<%-fineKeys[key]%> <%-username %>"
               >
                 Update
               </button>
-            </td> -->
+            </td>
           </tr>
     
           <%}else{%>
@@ -54,15 +53,14 @@
             <td><%=finestatement[key].amount%></td>
             <td>0</td>
             <td><%=finestatement[key].balance%></td>
-            <!-- <td>
+            <td>
               <button
-                class="deletetransactionbutton3"
                 name="updatebutton"
                 value="<%-fineKeys[key]%> <%-username %>"
               >
                 Update
               </button>
-            </td> -->
+            </td>
           </tr>
     
           <%}%> <%x++%> <%}%>

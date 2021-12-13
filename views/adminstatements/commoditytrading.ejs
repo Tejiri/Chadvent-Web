@@ -1,20 +1,17 @@
-
-
-
 <div class="container">
-    <div class="row">
-      <div class="col-lg-12 d-flex justify-content-center">
-        <h2>Commodity Trading Account Statement</h2>
-      </div>
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-center">
+      <h2>Commodity Trading Account Statement</h2>
     </div>
   </div>
-  
-  <form id="deletetransaction2" action="" method="post">
+</div>
+
+<form action="" method="post">
   <div class="container">
     <table
       id="commodityTradingTable"
       class="display blueTable"
-      style="width: 100%;"
+      style="width: 100%"
     >
       <thead>
         <tr>
@@ -24,13 +21,13 @@
           <th>Debit</th>
           <th>Credit</th>
           <th>Commodity Trading Account Balance</th>
-          <!-- <th>Update</th> -->
+          <th>Update</th>
         </tr>
       </thead>
-  
+
       <tbody>
-        <%commodityTradingKeys %>
-        <%let x = 1 %> <% for (const key in commoditytradingstatement) { %>
+        <%commodityTradingKeys %> <%let x = 1 %> <% for (const key in
+        commoditytradingstatement) { %>
         <%if(commoditytradingstatement[key].transactiontype == "credit"){%>
         <tr>
           <td><%=x%></td>
@@ -39,19 +36,18 @@
           <td>0</td>
           <td><%=commoditytradingstatement[key].amount%></td>
           <td><%=commoditytradingstatement[key].balance%></td>
-          <!-- <td>
+          <td>
             <button
-              class="deletetransactionbutton2"
               name="updatebutton"
               value="<%-commodityTradingKeys[key]%> <%-username %>"
             >
               Update
             </button>
-          </td> -->
+          </td>
         </tr>
-  
+
         <%}else{%>
-  
+
         <tr>
           <td><%=x%></td>
           <td><%=commoditytradingstatement[key].date%></td>
@@ -59,21 +55,18 @@
           <td><%=commoditytradingstatement[key].amount%></td>
           <td>0</td>
           <td><%=commoditytradingstatement[key].balance%></td>
-          <!-- <td>
+          <td>
             <button
-              class="deletetransactionbutton2"
               name="updatebutton"
               value="<%-commodityTradingKeys[key]%> <%-username %>"
             >
               Update
             </button>
-          </td> -->
+          </td>
         </tr>
-  
+
         <%}%> <%x++%> <%}%>
       </tbody>
     </table>
   </div>
-
-  </form>
-  
+</form>

@@ -54,7 +54,6 @@ function updateAccount(
     accountModel.updateOne(
       { username: accountUsername },
       {
-        
         $push: { transactions: transaction },
       },
       function (err, doc) {
@@ -843,7 +842,7 @@ const editMemberPost = function (req, res) {
             date: docs.transactions[key].date,
             user: list[1],
           };
-         
+
           // res.json(tran);
           // console.log(tran);
           res.redirect("edittransaction?valid=" + JSON.stringify(tran));

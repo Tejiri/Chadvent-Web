@@ -9,7 +9,7 @@
 </div>
 
 
-<form id="deletetransaction4" action="" method="post">
+<form action="" method="post">
 <div class="container">
     <table id="loanTable" class="display blueTable" style="width: 100%">
         <thead>
@@ -20,7 +20,7 @@
             <th>Debit</th>
             <th>Credit</th>
             <th>Loan Account Balance</th>
-            <!-- <th>Update</th> -->
+            <th>Update</th>
           </tr>
         </thead>
     
@@ -35,15 +35,14 @@
             <td>0</td>
             <td><%=loanstatement[key].amount%></td>
             <td><%=loanstatement[key].balance%></td>
-            <!-- <td>
+            <td>
               <button
-                class="deletetransactionbutton4"
                 name="updatebutton"
                 value="<%-loanKeys[key]%> <%-username %>"
               >
                 Update
               </button>
-            </td> -->
+            </td>
           </tr>
     
           <%}else{%>
@@ -55,15 +54,14 @@
             <td><%=loanstatement[key].amount%></td>
             <td>0</td>
             <td><%=loanstatement[key].balance%></td>
-            <!-- <td>
+            <td>
               <button
-                class="deletetransactionbutton4"
                 name="updatebutton"
                 value="<%-loanKeys[key]%> <%-username %>"
               >
                 Update
               </button>
-            </td> -->
+            </td>
           </tr>
     
           <%}%> <%x++%> <%}%>
