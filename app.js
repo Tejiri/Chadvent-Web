@@ -69,32 +69,299 @@ app.use("/statements", statementsrouter);
 app.use("/profile", profilerouter);
 app.use("/admin/accounttotal", individualContributionrouter);
 
+function updateUserAccount2(body) {
+  var currentCalculation;
+  var query = {};
+  var accountValue = {};
+
+  accountModel.findOne({ username: body.user }, (err, doc) => {
+    switch (body.account) {
+      case "sharecapital":
+        accountValue["account"] = doc.sharecapital;
+        break;
+      case "thriftsavings":
+        accountValue["account"] = doc.thriftsavings;
+        break;
+      case "specialdeposit":
+        accountValue["account"] = doc.specialdeposit;
+        break;
+      case "commoditytrading":
+        accountValue["account"] = doc.commoditytrading;
+        break;
+      case "fine":
+        accountValue["account"] = doc.fine;
+        break;
+      case "loan":
+        accountValue["account"] = doc.loan;
+        break;
+      case "projectfinancing":
+        accountValue["account"] = doc.projectfinancing;
+        break;
+      default:
+        break;
+    }
+
+    if (body.transactiontype == "credit") {
+      currentCalculation =
+        parseFloat(accountValue.account) + parseFloat(body.amount);
+    } else {
+      currentCalculation =
+        parseFloat(accountValue.account) - parseFloat(body.amount);
+    }
+
+    currentCalculation = (Math.round(currentCalculation * 100) / 100).toFixed(
+      2
+    );
+    query[body.account] = currentCalculation;
+
+    // console.log(query);
+    // console.log(accountValue);
+    //console.log(accountValue.account);
+
+    accountModel.updateOne(
+      { username: body.user },
+      { $set: query },
+      (err, doc) => {
+        if (err) {
+          console.log(err);
+        } else {
+        }
+      }
+    );
+  });
+}
+
+function updateUserAccount(body, previousDetails, doc) {
+  var previousCalculation;
+  var query = {};
+  var accountValue = {};
+  // var query = {};
+  // query[account] = closingAmount;
+  switch (previousDetails.account) {
+    case "sharecapital":
+      accountValue["account"] = doc.sharecapital;
+      break;
+    case "thriftsavings":
+      accountValue["account"] = doc.thriftsavings;
+      break;
+    case "specialdeposit":
+      accountValue["account"] = doc.specialdeposit;
+      break;
+    case "commoditytrading":
+      accountValue["account"] = doc.commoditytrading;
+      break;
+    case "fine":
+      accountValue["account"] = doc.fine;
+      break;
+    case "loan":
+      accountValue["account"] = doc.loan;
+      break;
+    case "projectfinancing":
+      accountValue["account"] = doc.projectfinancing;
+      break;
+
+    default:
+      break;
+  }
+
+  previousCalculation =
+    parseFloat(accountValue.account) - parseFloat(previousDetails.amount);
+
+  previousCalculation = (Math.round(previousCalculation * 100) / 100).toFixed(
+    2
+  );
+
+  query[previousDetails.account] = previousCalculation;
+
+  console.log(query);
+  accountModel
+    .updateOne({ username: body.user }, { $set: query }, (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+      }
+    })
+    .then(() => {
+      updateUserAccount2(body);
+    });
+}
+
 app
   .get("/edittransaction", (req, res) => {
-    trans = req.query.valid;
-    var tran = JSON.parse(trans);
-    //   console.log(req.query);
-    //   console.log(req.query.valid);
-    //  var name = JSON.stringify(tran);
-    //  console.log(name);
-    res.render("edittransaction", {
-      id: tran._id,
-      transactiontype: tran.transactiontype,
-      account: tran.account,
-      amount: tran.amount,
-      narration: tran.narration,
-      date: tran.date,
-      user: tran.user,
-    });
+    if (req.isAuthenticated()) {
+      if (req.user.username == process.env.ADMIN_USERNAME) {
+        trans = req.query.valid;
+
+        var tran = JSON.parse(trans);
+
+        var amountToSend = "";
+        try {
+          var checkAmount = String(tran.amount).split("-");
+
+          if (checkAmount.length == 1) {
+            amountToSend = checkAmount[0];
+          } else {
+            amountToSend = checkAmount[1];
+          }
+        } catch (error) {
+          console.log(error);
+        }
+
+        res.render("edittransaction", {
+          id: tran._id,
+          transactiontype: tran.transactiontype,
+          account: tran.account,
+          amount: amountToSend,
+          narration: tran.narration,
+          date: tran.date,
+          user: tran.user,
+        });
+      } else {
+        res.redirect("dashboard");
+      }
+    } else {
+      res.redirect("/");
+    }
   })
   .post("/edittransaction", (req, res) => {
-    accountModel.find((err, docs) => {
-      console.log(docs);
-    });
-    // accountModel.findOne({_id:req.body.id},(err,doc)=>{
-    //   console.log(doc);
-    // })
-    // console.log(req.body);
+    console.log(req.body);
+
+    if (req.body.actiontoperform == "update") {
+      accountModel.findOne({ username: req.body.user }, (err, doc) => {
+        if (err) {
+          console.log(err);
+        } else {
+          for (const key in doc.transactions) {
+            if (doc.transactions[key]._id == req.body.id) {
+              var previousDetails = {
+                id: doc.transactions[key]._id,
+                transactiontype: doc.transactions[key].transactiontype,
+                account: doc.transactions[key].account,
+                amount: doc.transactions[key].amount,
+                narration: doc.transactions[key].narration,
+                date: doc.transactions[key].date,
+              };
+              updateUserAccount(req.body, previousDetails, doc);
+              // accountModel.updateOne({username: req.body.user}, {$set:previousDetails.account:})
+              // var finalKey = key;
+              if (req.body.transactiontype == "credit") {
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  {
+                    $set: {
+                      "transactions.$[key].transactiontype":
+                        req.body.transactiontype,
+                      "transactions.$[key].account": req.body.account,
+                      "transactions.$[key].amount": parseFloat(req.body.amount),
+                      "transactions.$[key].narration": req.body.narration,
+                      "transactions.$[key].date": req.body.date,
+                    },
+                  },
+                  {
+                    arrayFilters: [{ "key._id": req.body.id }],
+                    new: true,
+                  },
+                  (err, doc) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      var tran = {
+                        _id: req.body.id,
+                        transactiontype: req.body.transactiontype,
+                        account: req.body.account,
+                        amount: parseFloat(req.body.amount),
+                        narration: req.body.narration,
+                        date: req.body.date,
+                        user: req.body.user,
+                      };
+                      var data = JSON.stringify(tran);
+                      res.send(data);
+                    }
+                  }
+                );
+              } else {
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  {
+                    $set: {
+                      "transactions.$[key].transactiontype":
+                        req.body.transactiontype,
+                      "transactions.$[key].account": req.body.account,
+                      "transactions.$[key].amount": parseFloat(
+                        -+req.body.amount
+                      ),
+                      "transactions.$[key].narration": req.body.narration,
+                      "transactions.$[key].date": req.body.date,
+                    },
+                  },
+                  {
+                    arrayFilters: [{ "key._id": req.body.id }],
+                    new: true,
+                  },
+                  (err, doc) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      var tran = {
+                        _id: req.body.id,
+                        transactiontype: req.body.transactiontype,
+                        account: req.body.account,
+                        amount: parseFloat(-+req.body.amount),
+                        narration: req.body.narration,
+                        date: req.body.date,
+                        user: req.body.user,
+                      };
+                      var data = JSON.stringify(tran);
+                      res.send(data);
+                    }
+                  }
+                );
+              }
+            }
+          }
+        }
+      });
+    } else if (req.body.actiontoperform == "delete") {
+      var finalValue;
+
+      accountModel.findOne({ username: req.body.user }, (err, found) => {
+        if (req.body.transactiontype == "debit") {
+          finalValue =
+            parseFloat(found.sharecapital) + parseFloat(req.body.amount);
+        } else {
+          finalValue =
+            parseFloat(found.sharecapital) - parseFloat(req.body.amount);
+        }
+
+        // console.log(finalValue);
+
+        accountModel.findOneAndUpdate(
+          { username: req.body.user },
+          { sharecapital: finalValue.toFixed(2) },
+          function (err, doc) {
+            if (err) {
+            } else {
+              accountModel.findOneAndUpdate(
+                { username: req.body.user },
+                { $pull: { transactions: { _id: req.body.id } } },
+                { safe: true, upsert: true },
+                function (err, doc) {
+                  if (err) {
+                  } else {
+                    var data = {
+                      ok: 1,
+                      user: req.body.user,
+                    };
+                    res.json(data);
+                  }
+                }
+              );
+            }
+          }
+        );
+      });
+    } else {
+    }
   });
 // app.use("/edittransaction",edittransactionrouter)
 

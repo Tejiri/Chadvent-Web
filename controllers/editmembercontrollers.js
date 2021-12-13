@@ -1,6 +1,7 @@
 const userModel = require("../models/usermodel");
 const accountModel = require("../models/accountmodels");
 const memberModel = require("../models/membermodels");
+const { json } = require("express");
 
 var memberList = [];
 var contributionList = ["fdsdfds", "dffdsfsd"];
@@ -53,6 +54,7 @@ function updateAccount(
     accountModel.updateOne(
       { username: accountUsername },
       {
+        
         $push: { transactions: transaction },
       },
       function (err, doc) {
@@ -822,8 +824,9 @@ const editMemberPost = function (req, res) {
     );
   } else {
     var button = req.body.updatebutton;
+    // console.log(button);
     var list = button.split(" ");
-    //console.log(list);
+    // console.log(list);
     accountModel.findOne({ username: list[1] }, function (err, docs) {
       if (err) {
         res.send(err);
@@ -839,8 +842,10 @@ const editMemberPost = function (req, res) {
             date: docs.transactions[key].date,
             user: list[1],
           };
-          res.json(tran);
-          // res.redirect("edittransaction");
+         
+          // res.json(tran);
+          // console.log(tran);
+          res.redirect("edittransaction?valid=" + JSON.stringify(tran));
           // console.log(tran);
           // if (tran.transactiontype == "credit") {
           //   var account = tran.account;
