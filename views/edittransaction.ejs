@@ -235,7 +235,7 @@ function sweetSuccess(message) {
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "http://localhost:3000/edittransaction",
+              url: "https://chadventmpcs.herokuapp.com/edittransaction",
               type: "POST",
               data: {
                 actiontoperform: "update",
@@ -252,7 +252,7 @@ function sweetSuccess(message) {
 
 sweetSuccess("Transaction updated successfully")
                 setTimeout(function () {
-                  location.replace("http://localhost:3000/edittransaction?valid=" + data)
+                  location.replace("https://chadventmpcs.herokuapp.com/edittransaction?valid=" + data)
             }, 2000);
            
            
@@ -286,7 +286,7 @@ sweetSuccess("Transaction updated successfully")
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "http://localhost:3000/edittransaction",
+              url: "https://chadventmpcs.herokuapp.com/edittransaction",
               type: "POST",
               data: {
                 actiontoperform: "delete",
@@ -302,7 +302,7 @@ sweetSuccess("Transaction updated successfully")
                 sweetSuccess("Transaction deleted successfully")
                 console.log(data);
                 setTimeout(function () {
-                  location.replace("http://localhost:3000/editmember?username=" + data.user )
+                  location.replace("https://chadventmpcs.herokuapp.com/editmember?username=" + data.user )
             }, 2000);
               },
 
@@ -326,7 +326,7 @@ sweetSuccess("Transaction updated successfully")
           denyButtonText: `No`,
         }).then((result) => {
           if (result.isConfirmed) {
-            location.replace("http://localhost:3000/editmember?username=" + currentuser );
+            location.replace("https://chadventmpcs.herokuapp.com/editmember?username=" + currentuser );
            
               }
              
