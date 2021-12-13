@@ -252,7 +252,7 @@ app
                       "transactions.$[key].transactiontype":
                         req.body.transactiontype,
                       "transactions.$[key].account": req.body.account,
-                      "transactions.$[key].amount": parseFloat(req.body.amount).toFixed(2),
+                      "transactions.$[key].amount": parseFloat(req.body.amount),
                       "transactions.$[key].narration": req.body.narration,
                       "transactions.$[key].date": req.body.date,
                     },
@@ -269,7 +269,7 @@ app
                         _id: req.body.id,
                         transactiontype: req.body.transactiontype,
                         account: req.body.account,
-                        amount: parseFloat(req.body.amount).toFixed(2),
+                        amount: parseFloat(req.body.amount),
                         narration: req.body.narration,
                         date: req.body.date,
                         user: req.body.user,
@@ -289,7 +289,7 @@ app
                       "transactions.$[key].account": req.body.account,
                       "transactions.$[key].amount": parseFloat(
                         -+req.body.amount
-                      ).toFixed(2),
+                      ),
                       "transactions.$[key].narration": req.body.narration,
                       "transactions.$[key].date": req.body.date,
                     },
@@ -306,7 +306,7 @@ app
                         _id: req.body.id,
                         transactiontype: req.body.transactiontype,
                         account: req.body.account,
-                        amount: parseFloat(-+req.body.amount).toFixed(2),
+                        amount: parseFloat(-+req.body.amount),
                         narration: req.body.narration,
                         date: req.body.date,
                         user: req.body.user,
