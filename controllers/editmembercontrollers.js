@@ -824,6 +824,7 @@ const editMemberPost = function (req, res) {
     );
   } else {
     var button = req.body.updatebutton;
+    console.log(button);
     // console.log(button);
     var list = button.split(" ");
     // console.log(list);

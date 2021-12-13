@@ -17,7 +17,7 @@
           <th>Debit</th>
           <th>Credit</th>
           <th>Project Financing Account Balance</th>
-          <!-- <th>Delete</th> -->
+          <th>Update</th>
         </tr>
       </thead>
   
@@ -32,15 +32,15 @@
           <td>0</td>
           <td><%=projectfinancingstatement[key].amount%></td>
           <td><%=projectfinancingstatement[key].balance%></td>
-          <!-- <td>
+          <td>
             <button
               class="deletetransactionbutton5"
               name="updatebutton"
               value="<%-projectFinancingKeys[key]%> <%-username %>"
             >
-              Delete
+              Update
             </button>
-          </td> -->
+          </td>
         </tr>
   
         <%}else{%>
@@ -52,15 +52,15 @@
           <td><%=projectfinancingstatement[key].amount%></td>
           <td>0</td>
           <td><%=projectfinancingstatement[key].balance%></td>
-          <!-- <td>
+          <td>
             <button
               class="deletetransactionbutton5"
               name="updatebutton"
               value="<%-projectFinancingKeys[key]%> <%-username %>"
             >
-              Delete
+              Update
             </button>
-          </td> -->
+          </td>
         </tr>
   
         <%}%> <%x++%> <%}%>
