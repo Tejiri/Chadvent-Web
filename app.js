@@ -183,40 +183,41 @@ function updateUserAccount(body, previousDetails, doc) {
 
 app
   .get("/edittransaction", (req, res) => {
-    if (req.isAuthenticated()) {
-      if (req.user.username == process.env.ADMIN_USERNAME) {
-        trans = req.query.valid;
+    // if (req.isAuthenticated()) {
+    //   if (req.user.username == process.env.ADMIN_USERNAME) {
+    trans = req.query.valid;
 
-        var tran = JSON.parse(trans);
+    var tran = JSON.parse(trans);
 
-        var amountToSend = "";
-        try {
-          var checkAmount = String(tran.amount).split("-");
+    var amountToSend = "";
+    try {
+      var checkAmount = String(tran.amount).split("-");
 
-          if (checkAmount.length == 1) {
-            amountToSend = checkAmount[0];
-          } else {
-            amountToSend = checkAmount[1];
-          }
-        } catch (error) {
-          console.log(error);
-        }
-
-        res.render("edittransaction", {
-          id: tran._id,
-          transactiontype: tran.transactiontype,
-          account: tran.account,
-          amount: amountToSend,
-          narration: tran.narration,
-          date: tran.date,
-          user: tran.user,
-        });
+      if (checkAmount.length == 1) {
+        amountToSend = checkAmount[0];
       } else {
-        res.redirect("dashboard");
+        amountToSend = checkAmount[1];
       }
-    } else {
-      res.redirect("/");
+    } catch (error) {
+      console.log(error);
     }
+
+    res.render("edittransaction", {
+      id: tran._id,
+      transactiontype: tran.transactiontype,
+      account: tran.account,
+      amount: amountToSend,
+      narration: tran.narration,
+      date: tran.date,
+      user: tran.user,
+    });
+    // } else {
+    //   res.redirect("dashboard");
+    // }
+    // }
+    //  else {
+    //   res.redirect("/");
+    // }
   })
   .post("/edittransaction", (req, res) => {
     // console.log(req.body);
@@ -317,44 +318,456 @@ app
         }
       });
     } else if (req.body.actiontoperform == "delete") {
+      // console.log(req.body);
+      var query = {};
+      // // var currentDetails = {};
       var finalValue;
+      // var account = req.body.account;
+      var transactionDetails;
+      accountModel.findOne({ username: req.body.user }, (err, doc) => {
+        // console.log(doc);
+        // console.log(doc.transactions);
+        for (const key in doc.transactions) {
+          if (doc.transactions[key]._id == req.body.id) {
+            transactionDetails = doc.transactions[key];
+            // console.log(doc.transactions[key]);
 
-      accountModel.findOne({ username: req.body.user }, (err, found) => {
-        if (req.body.transactiontype == "debit") {
-          finalValue =
-            parseFloat(found.sharecapital) + parseFloat(req.body.amount);
-        } else {
-          finalValue =
-            parseFloat(found.sharecapital) - parseFloat(req.body.amount);
-        }
-
-        // console.log(finalValue);
-
-        accountModel.findOneAndUpdate(
-          { username: req.body.user },
-          { sharecapital: finalValue.toFixed(2) },
-          function (err, doc) {
-            if (err) {
-            } else {
-              accountModel.findOneAndUpdate(
-                { username: req.body.user },
-                { $pull: { transactions: { _id: req.body.id } } },
-                { safe: true, upsert: true },
-                function (err, doc) {
-                  if (err) {
-                  } else {
-                    var data = {
-                      ok: 1,
-                      user: req.body.user,
-                    };
-                    res.json(data);
-                  }
+            switch (transactionDetails.account) {
+              case "sharecapital":
+                if (transactionDetails.transactiontype == "debit") {
+                  finalValue =
+                    parseFloat(doc.sharecapital) +
+                    parseFloat(transactionDetails.amount);
+                } else {
+                  finalValue =
+                    parseFloat(doc.sharecapital) -
+                    parseFloat(transactionDetails.amount);
                 }
-              );
+
+                query[transactionDetails.account] = finalValue.toFixed(2);
+
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  query,
+                  function (err, doc) {
+                    if (err) {
+                    } else {
+                      accountModel.findOneAndUpdate(
+                        { username: req.body.user },
+                        {
+                          $pull: {
+                            transactions: { _id: transactionDetails._id },
+                          },
+                        },
+                        { safe: true, upsert: true },
+                        function (err, doc) {
+                          if (err) {
+                          } else {
+                            var data = {
+                              ok: 1,
+                              user: req.body.user,
+                            };
+                            res.json(data);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+                break;
+
+              case "thriftsavings":
+                if (transactionDetails.transactiontype == "debit") {
+                  finalValue =
+                    parseFloat(doc.thriftsavings) +
+                    parseFloat(transactionDetails.amount);
+                } else {
+                  finalValue =
+                    parseFloat(doc.thriftsavings) -
+                    parseFloat(transactionDetails.amount);
+                }
+
+                query[transactionDetails.account] = finalValue.toFixed(2);
+
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  query,
+                  function (err, doc) {
+                    if (err) {
+                    } else {
+                      accountModel.findOneAndUpdate(
+                        { username: req.body.user },
+                        {
+                          $pull: {
+                            transactions: { _id: transactionDetails._id },
+                          },
+                        },
+                        { safe: true, upsert: true },
+                        function (err, doc) {
+                          if (err) {
+                          } else {
+                            var data = {
+                              ok: 1,
+                              user: req.body.user,
+                            };
+                            res.json(data);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+                break;
+
+              case "specialdeposit":
+                if (transactionDetails.transactiontype == "debit") {
+                  finalValue =
+                    parseFloat(doc.specialdeposit) +
+                    parseFloat(transactionDetails.amount);
+                } else {
+                  finalValue =
+                    parseFloat(doc.specialdeposit) -
+                    parseFloat(transactionDetails.amount);
+                }
+
+                query[transactionDetails.account] = finalValue.toFixed(2);
+
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  query,
+                  function (err, doc) {
+                    if (err) {
+                    } else {
+                      accountModel.findOneAndUpdate(
+                        { username: req.body.user },
+                        {
+                          $pull: {
+                            transactions: { _id: transactionDetails._id },
+                          },
+                        },
+                        { safe: true, upsert: true },
+                        function (err, doc) {
+                          if (err) {
+                          } else {
+                            var data = {
+                              ok: 1,
+                              user: req.body.user,
+                            };
+                            res.json(data);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+
+                break;
+
+              case "commoditytrading":
+                if (transactionDetails.transactiontype == "debit") {
+                  finalValue =
+                    parseFloat(doc.commoditytrading) +
+                    parseFloat(transactionDetails.amount);
+                } else {
+                  finalValue =
+                    parseFloat(doc.commoditytrading) -
+                    parseFloat(transactionDetails.amount);
+                }
+
+                query[transactionDetails.account] = finalValue.toFixed(2);
+
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  query,
+                  function (err, doc) {
+                    if (err) {
+                    } else {
+                      accountModel.findOneAndUpdate(
+                        { username: req.body.user },
+                        {
+                          $pull: {
+                            transactions: { _id: transactionDetails._id },
+                          },
+                        },
+                        { safe: true, upsert: true },
+                        function (err, doc) {
+                          if (err) {
+                          } else {
+                            var data = {
+                              ok: 1,
+                              user: req.body.user,
+                            };
+                            res.json(data);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+                break;
+
+              case "fine":
+                if (transactionDetails.transactiontype == "debit") {
+                  finalValue =
+                    parseFloat(doc.fine) +
+                    parseFloat(transactionDetails.amount);
+                } else {
+                  finalValue =
+                    parseFloat(doc.fine) -
+                    parseFloat(transactionDetails.amount);
+                }
+
+                query[transactionDetails.account] = finalValue.toFixed(2);
+
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  query,
+                  function (err, doc) {
+                    if (err) {
+                    } else {
+                      accountModel.findOneAndUpdate(
+                        { username: req.body.user },
+                        {
+                          $pull: {
+                            transactions: { _id: transactionDetails._id },
+                          },
+                        },
+                        { safe: true, upsert: true },
+                        function (err, doc) {
+                          if (err) {
+                          } else {
+                            var data = {
+                              ok: 1,
+                              user: req.body.user,
+                            };
+                            res.json(data);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+                break;
+
+              case "loan":
+                if (transactionDetails.transactiontype == "debit") {
+                  finalValue =
+                    parseFloat(doc.loan) +
+                    parseFloat(transactionDetails.amount);
+                } else {
+                  finalValue =
+                    parseFloat(doc.loan) -
+                    parseFloat(transactionDetails.amount);
+                }
+
+                query[transactionDetails.account] = finalValue.toFixed(2);
+
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  query,
+                  function (err, doc) {
+                    if (err) {
+                    } else {
+                      accountModel.findOneAndUpdate(
+                        { username: req.body.user },
+                        {
+                          $pull: {
+                            transactions: { _id: transactionDetails._id },
+                          },
+                        },
+                        { safe: true, upsert: true },
+                        function (err, doc) {
+                          if (err) {
+                          } else {
+                            var data = {
+                              ok: 1,
+                              user: req.body.user,
+                            };
+                            res.json(data);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+                break;
+
+              case "projectfinancing":
+                if (transactionDetails.transactiontype == "debit") {
+                  finalValue =
+                    parseFloat(doc.projectfinancing) +
+                    parseFloat(transactionDetails.amount);
+                } else {
+                  finalValue =
+                    parseFloat(doc.projectfinancing) -
+                    parseFloat(transactionDetails.amount);
+                }
+
+                query[transactionDetails.account] = finalValue.toFixed(2);
+
+                accountModel.findOneAndUpdate(
+                  { username: req.body.user },
+                  query,
+                  function (err, doc) {
+                    if (err) {
+                    } else {
+                      accountModel.findOneAndUpdate(
+                        { username: req.body.user },
+                        {
+                          $pull: {
+                            transactions: { _id: transactionDetails._id },
+                          },
+                        },
+                        { safe: true, upsert: true },
+                        function (err, doc) {
+                          if (err) {
+                          } else {
+                            var data = {
+                              ok: 1,
+                              user: req.body.user,
+                            };
+                            res.json(data);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+                break;
+
+              default:
+                break;
             }
           }
-        );
+        }
       });
+
+      // console.log(account);
+      // accountModel
+      //   .findOne({ username: req.body.user }, (err, found) => {
+      //     console.log(account);
+      //     switch (account) {
+      //       case "sharecapital":
+      //         if (req.body.transactiontype == "debit") {
+      //           finalValue =
+      //             parseFloat(found.sharecapital) + parseFloat(req.body.amount);
+      //         } else {
+      //           finalValue =
+      //             parseFloat(found.sharecapital) - parseFloat(req.body.amount);
+      //         }
+      //         break;
+      //       case "thriftsavings":
+      //         if (req.body.transactiontype == "debit") {
+      //           finalValue =
+      //             parseFloat(found.thriftsavings) + parseFloat(req.body.amount);
+      //         } else {
+      //           finalValue =
+      //             parseFloat(found.thriftsavings) - parseFloat(req.body.amount);
+      //         }
+      //         break;
+      //       case "specialdeposit":
+      //         if (req.body.transactiontype == "debit") {
+      //           finalValue =
+      //             parseFloat(found.specialdeposit) +
+      //             parseFloat(req.body.amount);
+      //         } else {
+      //           finalValue =
+      //             parseFloat(found.specialdeposit) -
+      //             parseFloat(req.body.amount);
+      //         }
+      //         break;
+      //       case "commoditytrading":
+      //         if (req.body.transactiontype == "debit") {
+      //           finalValue =
+      //             parseFloat(found.commoditytrading) +
+      //             parseFloat(req.body.amount);
+      //         } else {
+      //           finalValue =
+      //             parseFloat(found.commoditytrading) -
+      //             parseFloat(req.body.amount);
+      //         }
+      //         break;
+      //       case "fine":
+      //         if (req.body.transactiontype == "debit") {
+      //           finalValue =
+      //             parseFloat(found.fine) + parseFloat(req.body.amount);
+      //         } else {
+      //           finalValue =
+      //             parseFloat(found.fine) - parseFloat(req.body.amount);
+      //         }
+      //         break;
+      //       case "loan":
+      //         if (req.body.transactiontype == "debit") {
+      //           finalValue =
+      //             parseFloat(found.loan) + parseFloat(req.body.amount);
+      //         } else {
+      //           finalValue =
+      //             parseFloat(found.loan) - parseFloat(req.body.amount);
+      //         }
+      //         break;
+      //       case "projectfinancing":
+      //         if (req.body.transactiontype == "debit") {
+      //           finalValue =
+      //             parseFloat(found.projectfinancing) +
+      //             parseFloat(req.body.amount);
+      //         } else {
+      //           finalValue =
+      //             parseFloat(found.projectfinancing) -
+      //             parseFloat(req.body.amount);
+      //         }
+      //         break;
+
+      //       default:
+      //         break;
+      //     }
+      //   })
+      //   .then(() => {
+      //     // console.log(currentDetails);
+
+      //     // console.log(req.body);
+      //     // console.log(currentDetails);
+      //     // finalValue = (Math.round(finalValue * 100) / 100);
+
+      //     query[account] = finalValue.toFixed(2);
+
+      //     console.log(query);
+
+      //     accountModel.findOneAndUpdate(
+      //       { username: req.body.user },
+      //       query,
+      //       function (err, doc) {
+      //         if (err) {
+      //         } else {
+      //           accountModel.findOneAndUpdate(
+      //             { username: req.body.user },
+      //             { $pull: { transactions: { _id: req.body.id } } },
+      //             { safe: true, upsert: true },
+      //             function (err, doc) {
+      //               if (err) {
+      //               } else {
+      //                 var data = {
+      //                   ok: 1,
+      //                   user: req.body.user,
+      //                 };
+      //                 res.json(data);
+      //               }
+      //             }
+      //           );
+      //         }
+      //       }
+      //     );
+      //   });
+
+      // accountModel.findOne({ username: req.body.user }, (err, found) => {
+      //   if (req.body.transactiontype == "debit") {
+      //     finalValue =
+      //       parseFloat(found.sharecapital) + parseFloat(req.body.amount);
+      //   } else {
+      //     finalValue =
+      //       parseFloat(found.sharecapital) - parseFloat(req.body.amount);
+      //   }
+
+      //   // console.log(finalValue);
     } else {
     }
   });
