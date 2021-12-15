@@ -183,8 +183,8 @@ function updateUserAccount(body, previousDetails, doc) {
 
 app
   .get("/edittransaction", (req, res) => {
-    // if (req.isAuthenticated()) {
-    //   if (req.user.username == process.env.ADMIN_USERNAME) {
+    if (req.isAuthenticated()) {
+      if (req.user.username == process.env.ADMIN_USERNAME) {
     trans = req.query.valid;
 
     var tran = JSON.parse(trans);
@@ -211,13 +211,13 @@ app
       date: tran.date,
       user: tran.user,
     });
-    // } else {
-    //   res.redirect("dashboard");
-    // }
-    // }
-    //  else {
-    //   res.redirect("/");
-    // }
+    } else {
+      res.redirect("dashboard");
+    }
+    }
+     else {
+      res.redirect("/");
+    }
   })
   .post("/edittransaction", (req, res) => {
     // console.log(req.body);
