@@ -334,15 +334,9 @@ app
 
             switch (transactionDetails.account) {
               case "sharecapital":
-                if (transactionDetails.transactiontype == "debit") {
-                  finalValue =
-                    parseFloat(doc.sharecapital) +
-                    parseFloat(transactionDetails.amount);
-                } else {
-                  finalValue =
-                    parseFloat(doc.sharecapital) -
-                    parseFloat(transactionDetails.amount);
-                }
+                finalValue =
+                  parseFloat(doc.sharecapital) -
+                  parseFloat(transactionDetails.amount);
 
                 query[transactionDetails.account] = finalValue.toFixed(2);
 
@@ -377,15 +371,9 @@ app
                 break;
 
               case "thriftsavings":
-                if (transactionDetails.transactiontype == "debit") {
-                  finalValue =
-                    parseFloat(doc.thriftsavings) +
-                    parseFloat(transactionDetails.amount);
-                } else {
-                  finalValue =
-                    parseFloat(doc.thriftsavings) -
-                    parseFloat(transactionDetails.amount);
-                }
+                finalValue =
+                  parseFloat(doc.thriftsavings) -
+                  parseFloat(transactionDetails.amount);
 
                 query[transactionDetails.account] = finalValue.toFixed(2);
 
@@ -420,16 +408,9 @@ app
                 break;
 
               case "specialdeposit":
-                if (transactionDetails.transactiontype == "debit") {
-                  finalValue =
-                    parseFloat(doc.specialdeposit) +
-                    parseFloat(transactionDetails.amount);
-                } else {
-                  finalValue =
-                    parseFloat(doc.specialdeposit) -
-                    parseFloat(transactionDetails.amount);
-                }
-
+                finalValue =
+                  parseFloat(doc.specialdeposit) -
+                  parseFloat(transactionDetails.amount);
                 query[transactionDetails.account] = finalValue.toFixed(2);
 
                 accountModel.findOneAndUpdate(
@@ -464,16 +445,9 @@ app
                 break;
 
               case "commoditytrading":
-                if (transactionDetails.transactiontype == "debit") {
-                  finalValue =
-                    parseFloat(doc.commoditytrading) +
-                    parseFloat(transactionDetails.amount);
-                } else {
-                  finalValue =
-                    parseFloat(doc.commoditytrading) -
-                    parseFloat(transactionDetails.amount);
-                }
-
+                finalValue =
+                  parseFloat(doc.commoditytrading) -
+                  parseFloat(transactionDetails.amount);
                 query[transactionDetails.account] = finalValue.toFixed(2);
 
                 accountModel.findOneAndUpdate(
@@ -507,15 +481,8 @@ app
                 break;
 
               case "fine":
-                if (transactionDetails.transactiontype == "debit") {
-                  finalValue =
-                    parseFloat(doc.fine) +
-                    parseFloat(transactionDetails.amount);
-                } else {
-                  finalValue =
-                    parseFloat(doc.fine) -
-                    parseFloat(transactionDetails.amount);
-                }
+                finalValue =
+                  parseFloat(doc.fine) - parseFloat(transactionDetails.amount);
 
                 query[transactionDetails.account] = finalValue.toFixed(2);
 
@@ -550,15 +517,8 @@ app
                 break;
 
               case "loan":
-                if (transactionDetails.transactiontype == "debit") {
-                  finalValue =
-                    parseFloat(doc.loan) +
-                    parseFloat(transactionDetails.amount);
-                } else {
-                  finalValue =
-                    parseFloat(doc.loan) -
-                    parseFloat(transactionDetails.amount);
-                }
+                finalValue =
+                  parseFloat(doc.loan) - parseFloat(transactionDetails.amount);
 
                 query[transactionDetails.account] = finalValue.toFixed(2);
 
@@ -593,15 +553,9 @@ app
                 break;
 
               case "projectfinancing":
-                if (transactionDetails.transactiontype == "debit") {
-                  finalValue =
-                    parseFloat(doc.projectfinancing) +
-                    parseFloat(transactionDetails.amount);
-                } else {
-                  finalValue =
-                    parseFloat(doc.projectfinancing) -
-                    parseFloat(transactionDetails.amount);
-                }
+                finalValue =
+                  parseFloat(doc.projectfinancing) -
+                  parseFloat(transactionDetails.amount);
 
                 query[transactionDetails.account] = finalValue.toFixed(2);
 
